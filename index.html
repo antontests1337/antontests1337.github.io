@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="uk" data-theme="dark"><head><title>Aita — одна система для роботи компанії</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Inter:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="dark"]{--bg:#141414;--ink:#ffffff;--mute:#bababa;--faint:#666666;--line:#212121;--soft:#0d0d0d;--card:#000000;--acc:#ffffff;--accs:rgba(255,255,255,.07);--accb:#333333;--ok:#00b800;--oks:rgba(0,184,0,.16);--blue:#0060ff;--btn:#ffffff;--btnt:#000000;--shadow:0 30px 80px rgba(0,0,0,.5)}
+[data-theme="light"]{--bg:#f5f5f5;--ink:#111111;--mute:#737373;--faint:#888888;--line:#e6e6e6;--soft:#fafafa;--card:#ffffff;--acc:#111111;--accs:rgba(0,0,0,.07);--accb:#cccccc;--ok:#00b800;--oks:rgba(0,184,0,.14);--blue:#0060ff;--btn:#111111;--btnt:#ffffff;--shadow:0 30px 80px rgba(17,17,17,.08)}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 "Golos Text",-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);transition:background .2s,color .2s}
+.w{max-width:1160px;margin:0 auto;padding:0 32px}
+a{color:inherit;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;border-radius:8px;background:var(--btn);color:var(--btnt);font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--btn);cursor:pointer;font-family:inherit}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.sm{height:36px;padding:0 14px;font-size:14px}
+nav{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+nav .w{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:20px;letter-spacing:-.02em}
+.logo .mark{display:block;height:24px;width:auto;color:var(--ink)}
+.links{display:flex;gap:32px;font-size:15px;color:var(--mute)}
+.links span:nth-child(2):after{content:" ▾";font-size:11px}
+.nr{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.theme{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;font-size:16px}
+.burger{display:none;width:22px;height:14px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);position:relative}
+.burger:after{content:"";position:absolute;left:0;right:0;top:4px;border-top:2px solid var(--ink)}
+.hero{text-align:center;padding:48px 0 0}
+h1{font-family:"Inter",sans-serif;font-size:64px;line-height:1.05;letter-spacing:-.03em;margin:0 auto;font-weight:500;white-space:nowrap}
+h1 em{font-style:italic}
+.app{margin:56px auto 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-align:left;background:var(--card)}
+.bar{display:flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-bottom:1px solid var(--line);background:var(--soft)}
+.bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.bar span{margin-left:12px;font-size:12px;color:var(--mute)}
+.appb{display:grid;grid-template-columns:200px 1fr 280px;min-height:420px;font-size:13px}
+.side{border-right:1px solid var(--line);padding:16px 12px;background:var(--soft);display:flex;flex-direction:column;gap:2px}
+.side b{font-size:14px;margin:0 8px 12px}
+.side div{padding:7px 8px;border-radius:6px;color:var(--mute)}
+.side .on{background:var(--accs);color:var(--acc);font-weight:600}
+.main{padding:20px 22px}
+.crumb{color:var(--mute);font-size:12px}
+.ptitle{font-size:20px;font-weight:600;margin:4px 0 14px}
+.stages{display:flex;gap:6px;margin-bottom:18px}
+.stages div{flex:1;padding:7px 8px;border-radius:6px;background:var(--soft);font-size:12px;color:var(--mute);text-align:center}
+.stages .done{background:var(--oks);color:var(--ok)}
+.stages .cur{background:var(--btn);color:var(--btnt);font-weight:600}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px}
+.card h4{margin:0 0 8px;font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.li{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.li:first-of-type{border-top:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
+.dot.g{background:var(--ok)}.dot.b{background:var(--blue)}
+.av{width:20px;height:20px;border-radius:50%;background:var(--line);flex:none;margin-left:auto}
+.agent{border-left:1px solid var(--line);padding:16px;background:var(--soft);display:flex;flex-direction:column;gap:10px}
+.agent .h{display:flex;align-items:center;gap:8px;font-weight:600}
+.agent .h i{width:22px;height:22px;border-radius:6px;background:var(--acc)}
+.msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;line-height:1.45}
+.src{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.src span{font-size:11px;padding:2px 7px;border-radius:6px;background:var(--soft);color:var(--mute);border:1px solid var(--line)}
+.ok{display:flex;gap:6px;margin-top:8px}
+.ok span{font-size:12px;padding:5px 10px;border-radius:6px;background:var(--btn);color:var(--btnt);font-weight:600}
+.ok span+span{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.hbtn{display:flex;gap:12px;justify-content:center;margin:36px 0 0}
+section{padding:128px 0 0}
+h2{font-size:44px;line-height:1.15;letter-spacing:-.025em;margin:0;font-weight:500}
+.feat{display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.feat:first-of-type{border-top:0}
+.feat.rev .vis{order:-1}
+.feat h3{font-size:36px;line-height:1.12;letter-spacing:-.02em;margin:0;font-weight:500}
+.vis{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;min-height:300px;display:flex;align-items:center;justify-content:center}
+.rec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;width:100%;max-width:440px}
+.rec .t{font-weight:600;margin-bottom:10px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{display:flex;align-items:center;gap:6px;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:8px}
+.tag i{width:14px;height:14px;border-radius:4px;background:var(--accs);border:1px solid var(--accb)}
+.flow{display:flex;flex-direction:column;gap:10px;width:100%;max-width:440px}
+.st{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.st .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;background:var(--soft);color:var(--mute)}
+.st.d .n{background:var(--oks);color:var(--ok)}
+.st.c{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.st.c .n{background:var(--btn);color:var(--btnt)}
+.st small{margin-left:auto;color:var(--mute)}
+.ask{width:100%;max-width:460px;display:flex;flex-direction:column;gap:10px}
+.q{align-self:flex-end;background:var(--btn);color:var(--btnt);border-radius:12px 12px 4px 12px;padding:10px 14px;font-size:14px;max-width:80%}
+.a{background:var(--card);border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:12px 14px;font-size:14px}
+.caps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.cap .img{aspect-ratio:4/3;border-radius:12px;background:var(--card);border:1px solid var(--line);margin-bottom:16px;position:relative;overflow:hidden}
+.cap .img:after{content:"";position:absolute;inset:18% 14%;border-radius:8px;background:var(--soft);border:1px solid var(--line)}
+.cap:nth-child(1) .img{background:linear-gradient(160deg,rgba(0,184,0,.22),var(--card))}
+.cap:nth-child(2) .img{background:linear-gradient(160deg,rgba(0,96,255,.26),var(--card))}
+.cap:nth-child(3) .img{background:linear-gradient(160deg,rgba(255,0,0,.2),var(--card))}
+.cap:nth-child(4) .img{background:linear-gradient(160deg,rgba(255,187,0,.2),var(--card))}
+.cap h4{font-size:19px;margin:0 0 6px;font-weight:500}
+.cap p{margin:0 0 10px;color:var(--mute);font-size:15px}
+.more{color:var(--acc);font-weight:600;font-size:15px}
+.ctx{text-align:center}
+.ctx h2{max-width:900px;margin:0 auto}
+.chip{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;height:1.3em;padding:0 .4em;margin:0 .1em;border-radius:9999px;background:var(--accs);color:var(--acc);border:1px solid var(--accb);overflow:hidden;white-space:nowrap}
+.chip span{display:inline-block;transition:opacity .3s}
+.chip span.out{opacity:0}
+.video{margin:44px auto 0;aspect-ratio:16/9;max-width:1000px;border-radius:16px;background:#000;border:1px solid var(--line);display:grid;place-items:center;color:#bababa;font-size:15px;position:relative;overflow:hidden}
+.video:before{content:"";width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.12);position:absolute;top:calc(50% - 56px);left:calc(50% - 36px)}
+.video:after{content:"";position:absolute;top:calc(50% - 34px);left:calc(50% - 6px);border-left:22px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent}
+.video span{margin-top:90px;max-width:520px;padding:0 20px}
+.cta{text-align:center;padding:128px 0}
+.cta .btn{height:52px;padding:0 28px;font-size:16px}
+footer{background:var(--soft);border-top:1px solid var(--line);padding:40px 0;font-size:14px;color:var(--mute)}
+footer .w{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+footer b{color:var(--ink);font-size:16px;margin-right:12px}
+@media(max-width:760px){
+  .w{padding:0 16px}
+  nav .w{grid-template-columns:1fr auto;height:56px}
+  .links{display:none}.nr .btn{display:none}.burger{display:block}
+  .hero{padding-top:40px}
+  h1{font-size:34px;white-space:normal}
+  .app{margin-top:32px;border-radius:12px}
+  .appb{grid-template-columns:1fr;min-height:0}
+  .side,.agent{display:none}
+  .cols{grid-template-columns:1fr}
+  .hbtn{flex-direction:column;gap:10px;margin-top:24px}
+  .hbtn .btn{width:100%}
+  section{padding-top:72px}
+  h2{font-size:30px}
+  .feat,.feat.rev{grid-template-columns:1fr;gap:20px;padding:32px 0}
+  .feat.rev .vis{order:0}
+  .feat h3{font-size:26px}
+  .vis{padding:16px;min-height:0}
+  .caps{grid-template-columns:1fr;gap:28px;margin-top:28px}
+  .video{margin-top:24px;border-radius:12px}
+  .cta{padding:72px 0}
+  .cta .btn{width:100%}
+}
+</style></head><body>
+<nav><style>
+:root,[data-theme="dark"]{--bg:#000000;--card:#0d0d0d;--soft:#141414}
+[data-theme="light"]{--bg:#ffffff;--card:#ffffff;--soft:#fafafa}
+nav{background:#000 !important;backdrop-filter:none}
+[data-theme="light"] nav{background:#fff !important}
+.logo .mk{display:block;height:20px;width:auto}
+.logo .mk-l{display:none}
+[data-theme="light"] .logo .mk-d{display:none}
+[data-theme="light"] .logo .mk-l{display:block}
+</style><div class="w">
+  <a class="logo" aria-label="Aita" href="./"><svg class="mk mk-d" viewBox="0.475 0.467 90.548 81.672"><path fill="#ffffff" d="M35.327,8.909C36.329,3.913 40.772,0.355 45.867,0.470C50.779,0.569 54.964,4.065 55.935,8.881C60.018,29.131 70.226,47.636 85.175,61.891C88.832,63.732 91.106,67.509 91.021,71.602C90.943,75.691 88.539,79.379 84.829,81.101C80.259,83.223 74.829,81.870 71.788,77.852C62.947,70.571 52.914,64.871 42.132,61.005C40.636,60.463 39.499,59.223 39.093,57.684C38.598,55.737 39.392,53.691 41.071,52.587C42.410,51.710 44.102,51.571 45.567,52.218C52.059,55.085 58.830,57.276 65.771,58.755C61.269,46.527 54.431,35.292 45.638,25.675C33.311,39.167 24.893,55.762 21.289,73.678C20.420,78.000 16.952,81.325 12.597,82.011C7.497,82.814 2.571,79.788 0.982,74.876C-0.318,70.839 0.935,66.417 4.159,63.661C20.158,49.231 31.086,30.033 35.323,8.909Z"/></svg><svg class="mk mk-l" viewBox="0.024 0.017 91.449 82.571"><path fill="#000000" d="M34.896,8.778C35.933,3.677 40.434,0.017 45.639,0.017C50.844,0.016 55.345,3.676 56.371,8.779C60.448,28.946 70.592,47.364 85.450,61.528C89.522,63.609 91.881,67.981 91.415,72.530C90.950,77.079 87.754,80.883 83.353,82.126C78.953,83.369 74.239,81.799 71.462,78.166C62.659,70.929 52.739,65.292 41.976,61.426C40.196,60.763 38.875,59.235 38.567,57.362C38.258,55.488 39.004,53.597 40.507,52.437C42.011,51.278 44.028,51.042 45.763,51.812C52.007,54.566 58.458,56.680 65.062,58.140C60.642,46.435 54.059,35.645 45.639,26.345C33.568,39.678 25.282,56.076 21.716,73.833C20.751,78.493 16.885,82.006 12.154,82.523C7.424,83.040 2.901,80.441 0.967,76.093C-0.967,71.745 0.142,66.657 3.682,63.478C19.731,49.106 30.642,29.896 34.896,8.778Z"/></svg></a>
+  <span class="links"><span>Можливості</span><span id="rsBtn" role="button" aria-haspopup="true" style="position:relative;cursor:pointer">Ресурси<div class="rs-pop" id="rsPop"><style>
+/* меню «Ресурси»: відкривається наведенням (і кліком), як у Notion — дві колонки */
+#rsPop{position:absolute;left:50%;top:calc(100% + 18px);transform:translate(-50%,6px);display:grid;grid-template-columns:1fr 1fr;gap:8px;width:440px;padding:12px;border-radius:16px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.05);opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;cursor:default;z-index:20}
+#rsPop:before{content:"";position:absolute;left:0;right:0;top:-20px;height:20px}
+#rsBtn.on #rsPop{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#rsPop h6{margin:4px 10px 6px;font-size:12px;font-weight:500;color:#8a8a8a}
+#rsPop a{display:block;padding:5px 10px;border-radius:8px;font-size:17px;font-weight:500;color:#111;cursor:pointer}
+#rsPop a:hover{background:#f4f4f4}
+/* колонка «Компанія» — тонше й щільніше за «Aita для» */
+#rsPop>div:nth-of-type(2) a{font-weight:400;padding:3px 10px}
+#rsBtn.on{color:#111}
+/* мітка «в розробці» біля пункту */
+#rsPop a .tg{margin-left:8px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;background:#f2f2f2;color:#8a8a8a;vertical-align:2px}
+/* стрілка біля «Ресурси» — шеврон, при відкритті повертається */
+.links>#rsBtn:after{content:"";display:inline-block;width:14px;height:14px;margin-left:4px;vertical-align:-2px;font-size:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .2s}
+.links>#rsBtn.on:after{transform:rotate(180deg)}
+/* шапка нижча (72 → 60) */
+body>nav>.w{height:60px}
+@media(max-width:760px){body>nav>.w{height:56px}}
+</style><div><h6>Aita для</h6><a href="energy.html">Енергетика</a><a href="aita-startups.html">Стартапи</a></div><div><h6>Компанія</h6><a>Про нас</a><a>Що нового<span class="tg">в розробці</span></a><a>Команда</a></div><script>
+// відкривається наведенням (закривається з невеликою затримкою, щоб встигнути дійти курсором), а також кліком
+(function(){var b=document.getElementById("rsBtn"),p=document.getElementById("rsPop"),t=null;
+  b.addEventListener("mouseenter",function(){clearTimeout(t);b.classList.add("on")});
+  b.addEventListener("mouseleave",function(){clearTimeout(t);t=setTimeout(function(){b.classList.remove("on")},180)});
+  b.addEventListener("click",function(e){if(!p.contains(e.target)||e.target===p)b.classList.toggle("on")});
+  document.addEventListener("click",function(e){if(!b.contains(e.target))b.classList.remove("on")});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")b.classList.remove("on")});addEventListener("blur",function(){b.classList.remove("on")})})();
+</script></div></span><span><a href="pricing.html">Ціни</a></span></span>
+  <span class="nr"><span id="theme" hidden></span><style>
+/* поле 80 від краю, як у Linear (контейнер 1280) */
+.w{max-width:1440px!important;padding:0 80px!important}
+.hero h1{font-weight:600}
+.hero h1 em{font-weight:600}
+@media(max-width:760px){.w{padding:0 20px!important}}
+</style><script>document.documentElement.setAttribute("data-theme","light")</script><style>
+/* лише світла тема */
+#theme{display:none!important}
+html[data-theme],body{background:#fff}
+/* ширше: контент 1360 */
+.w{max-width:1360px;padding:0 40px}
+@media(max-width:760px){.w{padding:0 16px}}
+/* копія головної платформи — світла, як платформа за замовчуванням */
+html body .app.hp{--pl:#ececec;--ps:#e0e0e0;--pm:#555;--pf:#8a8a8a;background:#fff!important;color:#111!important;border:1px solid #e3e3e3!important;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.06)!important}
+html body .app.hp .tabs{background:#f6f6f6;border-bottom:1px solid #ececec}
+html body .app.hp .tab{background:#fff!important;color:#111}
+html body .app.hp .top{border-bottom:1px solid #ececec}
+html body .app.hp .brand path,html body .app.hp .hero path{fill:#111}
+html body .app.hp .search{background:#fafafa!important;border-color:#e0e0e0!important;color:#8a8a8a}
+html body .app.hp .pin{color:#555}
+html body .app.hp .pin b{background:#fff;color:#333;border-color:#e6e6e6}
+html body .app.hp .pin.more b{border-color:#d4d4d4;color:#8a8a8a}
+html body .app.hp .tr{color:#555}
+html body .app.hp .av{background:#f2f2f2!important;border-color:#e3e3e3!important}
+</style><script>document.documentElement.setAttribute("data-theme","light")</script><style>
+/* лише світла тема */
+#theme{display:none!important}
+html[data-theme],body{background:#fff}
+/* ширше: контент 1360 */
+.w{max-width:1360px;padding:0 40px}
+@media(max-width:760px){.w{padding:0 16px}}
+/* копія головної платформи — світла, як платформа за замовчуванням */
+.hp{--pl:#ececec;--ps:#e0e0e0;--pm:#555;--pf:#8a8a8a;background:#fff!important;color:#111!important;border:1px solid #e3e3e3!important}
+.hp .tabs{background:#f6f6f6}
+.hp .tab{background:#fff!important;color:#111}
+.hp .brand path,.hp .hero path{fill:#111}
+.hp .search{background:#fafafa!important;border-color:#e0e0e0!important;color:#8a8a8a}
+.hp .pin b{background:#fff;color:#333}
+.hp .tr{color:#555}
+.hp .av{background:#f2f2f2!important;border-color:#e3e3e3!important}
+</style><a class="btn sm" href="access.html">Запит на доступ</a><span class="burger"></span></span>
+</div></nav>
+<div class="w hero">
+  <h1 id="hh" style="text-align:center;padding-top:48px"><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,600;1,600&display=swap" rel="stylesheet"><style>
+.sub{display:block;margin:20px auto 0;max-width:640px;font:400 20px/1.4 "Golos Text",sans-serif;letter-spacing:0;color:var(--mute);white-space:normal;text-align:center}
+#hh{position:relative;max-width:none!important;font-weight:600}
+#hh .hw-t{display:block}
+#hh .hw-wd{font-style:italic}
+#hh .hw-t{line-height:1.04}
+#hh .sub{margin-top:24px!important}
+@media(max-width:760px){.sub{font-size:16px;margin-top:12px}#hh .hw-br{display:none}}
+</style><span class="hw-t">Керуйте <span class="hw-wd">всією компанією</span><br class="hw-br"> за допомогою&nbsp;Aita</span><span class="sub">Клієнти, проєкти, знання та ШІ-агенти — в одній системі</span></h1>
+  <div class="vid"><style>
+/* відступи — Linear, розміри — Notion (драфт «структура й відступи») */
+nav .w{height:72px}
+.hero{padding:0}
+.hero h1{padding-top:176px!important;font-size:96px;line-height:100px;letter-spacing:-.048em;white-space:normal;max-width:1000px;margin:0}
+.sub{margin-top:32px!important;font-size:20px!important;line-height:28px!important}
+.vid{margin:70px -20px 0!important}
+.hbtn{gap:16px;margin-top:32px;justify-content:flex-start}
+.hbtn .btn{height:48px;padding:0 24px;font-size:16px;border-radius:8px}
+.btn.ghost{background:#f0f0f0;border-color:#f0f0f0;color:#111}
+section{padding:128px 0}
+section+section{padding-top:128px}
+h2{font-size:56px;line-height:1.05;letter-spacing:-.03em}
+.ctx h2{max-width:1000px}
+.vis{border-radius:12px}
+.feat{gap:64px}
+.cta{padding:224px 0 128px}
+@media(max-width:760px){
+  nav .w{height:56px}
+  .hero h1{padding-top:96px!important;font-size:42px;line-height:48px}
+  .sub{margin-top:16px!important;font-size:16px!important;line-height:24px!important}
+  .vid{margin:48px 0 0!important}
+  .hbtn{margin-top:24px}
+  section{padding:72px 0}
+  h2{font-size:32px}
+  .cta{padding:96px 0 72px}
+}
+</style><style>
+/* перший екран: пошук → відео (прототип drd_DPViH1MDez1mUNBV), вбудований на всю ширину; заголовок по центру */
+.hero h1{max-width:none;margin:0 auto}
+.vid{margin:0!important;margin-left:calc(50% - 50vw)!important;width:100vw}
+#hwDemo{display:block;width:100%;height:352px;border:0;background:#fff}
+#hwBar{position:sticky;bottom:0;z-index:60;width:100vw;margin-left:calc(50% - 50vw);background:#fff;border-top:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+#hwBar.stuck{border-top-color:#e6e6e6;box-shadow:0 -10px 30px rgba(0,0,0,.04)}
+#hwBar .hw-in{max-width:1360px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:center;gap:16px}
+#hwBar .hw-tx{font-size:16px;line-height:1.4;color:var(--mute);margin-right:12px;white-space:nowrap;overflow:hidden;max-width:640px;transition:opacity .3s,max-width .45s cubic-bezier(.4,0,.2,1),margin-right .45s}
+#hwBar.stuck .hw-tx{opacity:0;max-width:0;margin-right:-16px}
+#hwBar .btn{height:48px;padding:0 24px;font-size:16px;border-radius:8px}
+@media(max-width:760px){.vid{display:none}#hwBar{position:static;width:auto;margin:0}#hwBar .hw-in{flex-direction:column;align-items:stretch;gap:10px;padding:24px 0 0}#hwBar .hw-tx{display:none}#hwBar .btn{width:100%}}
+</style><iframe id="hwDemo" title="Aita: пошук — вибір — коротке відео роботи в платформі" scrolling="no"></iframe><template id="hwT1"><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff}
+body{padding:0;font-family:"Golos Text",-apple-system,sans-serif;color:#111}
+.pg0{max-width:1440px;margin:0 auto;padding:120px 80px 160px}
+.pg0 h1{margin:0;font:600 96px/100px "Inter",sans-serif;letter-spacing:-.048em}
+.pg0 h1 em{font-style:italic}
+.pg0 .sub{margin:32px 0 0;font-size:20px;line-height:28px;color:#737373;font-weight:500}
+.demo{position:relative;margin:70px -20px 0}
+.sbw{position:relative;max-width:720px;transition:opacity .3s,transform .3s}
+.sbw.gone{opacity:0;transform:translateY(-8px);pointer-events:none;position:absolute;left:0;top:0;width:720px}
+.sb{display:flex;align-items:center;gap:14px;height:64px;padding:0 22px;border:1px solid #e0e0e0;border-radius:9999px;background:#fafafa;color:#8a8a8a;font-size:17px;cursor:text;transition:border-color .15s,background .15s,box-shadow .15s}
+.sb:hover{border-color:#cfcfcf;background:#f4f4f4}
+.sb.op{background:#fff;border-color:#bdbdbd;box-shadow:0 0 0 4px rgba(0,96,255,.10)}
+.sb kbd{margin-left:auto;font:12px "Golos Text";color:#8a8a8a;border:1px solid #e3e3e3;border-radius:5px;padding:2px 7px}
+.sbp{position:absolute;left:0;right:0;top:74px;z-index:5;padding:6px;border:1px solid #e3e3e3;border-radius:16px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.12);opacity:0;transform:translateY(-6px);transition:opacity .18s,transform .18s;pointer-events:none}
+.sbp.on{opacity:1;transform:none;pointer-events:auto}
+.sbp h6{margin:6px 10px 4px;font-size:13px;font-weight:500;color:#8a8a8a}
+.sbp .row{display:flex;align-items:center;gap:12px;height:48px;padding:0 12px;border-radius:10px;font-size:16px;color:#111;cursor:pointer}
+.sbp .row:hover{background:#f2f2f2}
+.sbp .row svg.i{color:#8a8a8a}
+.sbp .row small{margin-left:auto;color:#8a8a8a;font-size:14px}
+.wrap{max-width:none;margin:0}
+.box{position:relative;border:1px solid #e3e3e3;border-radius:16px;overflow:hidden;background:#fff;margin:0;height:0;opacity:0;transition:height .7s cubic-bezier(.2,.8,.2,1),opacity .4s;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.07)}
+.f{position:absolute;left:0;top:0;width:1440px;height:720px;transform-origin:0 0;font-size:14px;line-height:1.45;cursor:default;user-select:none}
+svg.i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mk{width:22px;height:20px;color:#111}
+.tabs{display:flex;align-items:flex-end;height:44px;padding:6px 8px 0;gap:2px;background:#f6f6f6;border-bottom:1px solid #ececec}
+.tab{height:38px;width:212px;display:flex;align-items:center;gap:8px;padding:0 12px;border-radius:8px 8px 0 0;font-size:14px;font-weight:500;color:#7a7a7a}
+.tab span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tab .n,.tab .x{font-style:normal;font-size:12px;color:#8a8a8a;opacity:0}
+.tab .x{width:18px;height:18px;display:grid;place-items:center;border-radius:4px;font-size:15px}
+.tab.on{background:#fff;color:#111}
+.tab.hv .n,.tab.hv .x{opacity:1}
+.tab .x.hv{background:#e8e8e8;color:#111}
+.tab.gone{display:none}
+.plus{width:32px;height:32px;display:grid;place-items:center;color:#8a8a8a;margin:0 0 3px 6px;border-radius:6px}
+.plus.hv{background:#ececec;color:#111}
+.top{position:relative;display:flex;align-items:center;height:46px;padding:0 16px;border-bottom:1px solid #ececec;background:#fff}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.tsr{position:absolute;left:50%;top:7px;width:560px;margin-left:-280px;height:32px;display:none;align-items:center;gap:10px;padding:0 12px;border:1px solid #e3e3e3;border-radius:9999px;background:#fafafa;color:#8a8a8a;font-size:13.5px}
+.tsr.on{display:flex}
+.tsr kbd,.search kbd{margin-left:auto;font:11px "Golos Text";color:#8a8a8a;border:1px solid #e3e3e3;border-radius:4px;padding:1px 5px}
+.tr{margin-left:auto;display:flex;align-items:center;gap:16px;color:#555}
+.tr .bd{position:relative;display:flex}
+.tr .dot{position:absolute;top:-6px;right:-8px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;background:#e5322d;color:#fff;font-size:9.5px;font-weight:600;font-style:normal;display:grid;place-items:center}
+.av{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#f2f2f2;border:1px solid #e3e3e3;font-size:16px}
+.stage{position:relative;height:630px;overflow:hidden}
+.pg{position:absolute;inset:0;display:none}
+.pg.on{display:block}
+.home .hero{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:64px;font-size:34px;font-weight:700;letter-spacing:-.02em}
+.home .hero .mk{width:42px;height:38px}
+.search{margin:30px auto 0;width:620px;height:52px;display:flex;align-items:center;gap:12px;padding:0 20px;border:1px solid #e0e0e0;border-radius:9999px;background:#fafafa;color:#8a8a8a;font-size:15.5px;transition:border-color .12s,background .12s}
+.search.hv{border-color:#cfcfcf;background:#f2f2f2}
+.search kbd{padding:2px 6px}
+.pins{margin:36px auto 0;display:flex;justify-content:center;gap:10px}
+.pin{width:96px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12.5px;color:#555}
+.pin b{width:48px;height:48px;display:grid;place-items:center;border:1px solid #e6e6e6;border-radius:12px;background:#fff;color:#333}
+.pin b svg.i{width:20px;height:20px}
+.pin.more b{border-style:dashed;border-color:#d4d4d4;color:#8a8a8a}.pin.more{color:#8a8a8a}
+.board{position:absolute;inset:0;padding:20px 24px}
+.board h3{margin:0 0 16px;font-size:20px;font-weight:600}
+.cols{display:flex;gap:12px}
+.col{width:268px;height:540px;border:1px solid #ececec;border-radius:12px;background:#fafafa;padding:14px}
+.col h6{margin:0 0 12px;font-size:12.5px;letter-spacing:.06em;color:#444;font-weight:600;display:flex;align-items:center;gap:8px}
+.col h6:before{content:"";width:7px;height:7px;border-radius:50%;background:#999}
+.cd{height:84px;border:1px solid #ececec;border-radius:10px;background:#fff;margin-bottom:10px}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.28)}
+.md{position:absolute;left:28px;right:28px;top:14px;bottom:0;border:1px solid #e3e3e3;border-bottom:0;border-radius:14px 14px 0 0;background:#fff;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.12)}
+.mh{height:52px;display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid #ececec}
+.mh .rt{margin-left:auto;display:flex;gap:22px;color:#555}
+.pill{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 10px;border:1px solid #e0e0e0;border-radius:8px;background:#fff;font-size:13.5px;font-weight:600;color:#111}
+.pill .d{width:7px;height:7px;border-radius:50%;background:#8c8c8c}
+.pill svg.i{width:13px;height:13px;color:#8c8c8c}
+.money{height:26px;padding:0 9px;display:inline-flex;align-items:center;border-radius:7px;background:rgba(0,184,0,.12);color:#11883a;font-size:13px;font-weight:600}
+.temp{height:26px;padding:0 9px;display:inline-flex;align-items:center;border-radius:8px;border:1.5px solid #ffa31a;color:#d97706;font-size:11px;font-weight:700;letter-spacing:.06em}
+.pri{border-color:#93c5fd;color:#1d4ed8;font-weight:500}
+.mb{display:grid;grid-template-columns:1fr 396px;height:calc(100% - 52px)}
+.ml{position:relative;padding:28px 36px;border-right:1px solid #ececec}
+.ml h2{margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.01em}
+.ml .em{color:#555;font-size:15px}
+.ml .ds{margin:36px 0 70px;color:#222;font-size:15px}
+.sec{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;margin-bottom:12px}
+.sec .ac{margin-left:auto;display:flex;gap:10px;color:#8a8a8a}
+.sec .ac span{width:28px;height:28px;display:grid;place-items:center;border-radius:6px}
+.sec .ac span.hv{background:#f0f0f0;color:#111}
+.lt{display:flex;align-items:center;gap:12px;margin-left:2px;padding:9px 14px;border-left:2px solid #d4d4d4;border-radius:0 8px 8px 0;font-size:15px;transition:background .12s}
+.lt.hv{background:#f6f6f6}
+.lt .ck{width:14px;height:14px;border-radius:50%;border:1.5px solid #9a9a9a}
+.lt small{margin-left:auto;color:#555;font-size:12.5px}
+.lt.newrow{border-left-color:#f5b400;color:#9a9a9a}
+.lt.newrow .ck{width:6px;height:6px;border:0;background:#999;margin:0 4px}
+.lt.newrow.typing{color:#111}
+.lt.fresh{animation:fr 1.4s ease-out}
+@keyframes fr{from{background:#f0f0f0}to{background:transparent}}
+.caret{display:inline-block;width:1.5px;height:17px;background:#111;vertical-align:-3px;margin-left:1px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.mr{padding:28px 24px;background:#fcfcfc}
+.mr h4{display:flex;justify-content:space-between;margin:0 0 22px;font-size:14.5px;font-weight:600}
+.mr h4 svg{color:#8a8a8a}
+.pr{display:grid;grid-template-columns:122px 1fr;row-gap:24px;font-size:14.5px;align-items:center}
+.pr>span{color:#555}
+.pr .v{display:flex;align-items:center;gap:8px;position:relative;color:#111}
+.pr .v b{font-weight:600}
+.mu{color:#7a7a7a}
+.pick{display:inline-flex;align-items:center;gap:8px;padding:4px 8px;margin-left:-8px;border-radius:8px;transition:background .12s}
+.pick.hv{background:#f2f2f2}
+.pa{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;flex:none}
+.pa.me{background:#f2f2f2;border:1px solid #e3e3e3;font-size:12px}
+.pa.ai{background:#000;border:1px solid #333}.pa.ai .mk{width:11px;height:10px;color:#fff}
+.tds{margin:14px 0 0;font-size:15px;color:#222;min-height:44px;max-width:620px}
+.tds.ph{color:#9a9a9a}
+.chk{margin-top:12px;display:none}
+.chk.on{display:block}
+.chk .ci{display:none;align-items:center;gap:10px;height:28px;font-size:14.5px;color:#222}
+.chk .ci.on{display:flex}
+.chk .ci i{width:15px;height:15px;border:1.5px solid #9a9a9a;border-radius:3px}
+.chat{position:absolute;left:36px;right:36px;bottom:12px}
+.ctabs{display:grid;grid-template-columns:1fr 1fr;text-align:center;font-size:14.5px;margin-bottom:6px}
+.ctabs span{padding-bottom:10px;border-bottom:1px solid #ececec;color:#7a7a7a}
+.ctabs span:first-child{color:#111;border-bottom:2px solid #111}
+.msgs{height:108px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding-bottom:10px}
+.msg{display:flex;gap:10px;font-size:14px;opacity:0;transition:opacity .3s}
+.msg.on{opacity:1}
+.msg .who{font-weight:600}
+.msg .who small{font-weight:400;color:#8a8a8a;margin-left:6px}
+.msg .tag{font-size:10.5px;padding:1px 6px;border-radius:4px;background:rgba(124,58,237,.1);color:#7c3aed;margin-left:6px;font-weight:500}
+.msg p{margin:2px 0 0;color:#222}
+.think i{font-style:normal;display:inline-block;animation:dt 1.2s infinite}
+.think i:nth-child(2){animation-delay:.2s}.think i:nth-child(3){animation-delay:.4s}
+@keyframes dt{0%,60%,100%{opacity:.2}30%{opacity:1}}
+.comp{border:1px solid #e3e3e3;border-radius:12px;background:#fff;transition:border-color .15s}
+.comp.fc{border-color:#bdbdbd}
+.comp .tx{height:40px;display:flex;align-items:center;padding:0 14px;font-size:14.5px;color:#9a9a9a}
+.comp.fc .tx{color:#111}
+.comp .bt{display:flex;align-items:center;gap:14px;height:38px;padding:0 12px;border-top:1px solid #f0f0f0;color:#8a8a8a}
+.comp .bt .sp{margin-left:auto;font-size:11px;color:#9a9a9a;font-family:ui-monospace,monospace}
+.comp .bt .snd{width:28px;height:28px;display:grid;place-items:center;border-radius:7px;border:1px solid #e3e3e3}
+.comp .bt .snd.rd{background:#111;color:#fff;border-color:#111}
+.av-ol{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Phoebe%20Schuppe") center/cover}
+.av-ma{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Liam%20Carter") center/cover}
+.av-so{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Hanna%20Homenick") center/cover}
+.av-da{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Graciela%20Koch") center/cover}
+.av-iv{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Marc%20Klein") center/cover}
+.av-ta{background:#eee url("https://api.dicebear.com/7.x/avataaars/svg?seed=Jody%20Wolf") center/cover}
+.mention{color:#7c3aed;background:rgba(124,58,237,.1);border-radius:4px;padding:0 3px}
+.sk{display:block;height:13px;border-radius:6px;background:#eee;margin:7px 0;animation:pl 1.1s ease-in-out infinite}
+@keyframes pl{50%{background:#e2e2e2}}
+.men{position:absolute;left:12px;bottom:92px;width:260px;z-index:9}
+.pop{position:absolute;z-index:9;border:1px solid #e3e3e3;border-radius:10px;background:#fff;padding:5px;display:none;box-shadow:0 12px 32px rgba(0,0,0,.12);font-size:14px}
+.pop.on{display:block}
+.pop .it{display:flex;align-items:center;gap:12px;height:36px;padding:0 10px;border-radius:6px;color:#111}
+.pop .it.hv{background:#f2f2f2}
+.pop .it small{margin-left:auto;font-size:11.5px;color:#8a8a8a}
+.pop .gl{font-size:12px;color:#8a8a8a;padding:8px 10px 4px}
+.pop .sep{height:1px;background:#ececec;margin:4px -5px}
+.cur{position:absolute;left:0;top:0;width:19px;height:23px;z-index:50;pointer-events:none;opacity:0;transition:opacity .45s ease}
+.cur.vis{opacity:1}
+.cur path{transform-origin:1px 1px;transition:transform .08s;fill:#111;stroke:#fff}
+.cur.dn path{transform:scale(.86)}
+</style>
+</template><template id="hwT2"><div class="pg0"><div class="demo" id="demo">
+<div class="sbw" id="sbw"><style>
+.sbp .row.hv{background:#f2f2f2}
+.sb.hv{border-color:#cfcfcf;background:#f4f4f4}
+.ocur{position:absolute;left:0;top:0;width:19px;height:23px;z-index:60;pointer-events:none;opacity:0;transition:opacity .4s}
+.ocur.vis{opacity:1}
+.ocur path{transform-origin:1px 1px;transition:transform .08s;fill:#111;stroke:#fff}
+.ocur.dn path{transform:scale(.86)}
+.src{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.src span{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border:1px solid #e3e3e3;border-radius:6px;background:#fafafa;font-size:12.5px;color:#555;transition:background .12s,border-color .12s}
+.src span.hv{background:#f0f0f0;border-color:#cfcfcf;color:#111}
+.src svg.i{width:12px;height:12px}
+.mail{padding:28px 36px}
+.mm{display:flex;gap:12px;padding:16px;border:1px solid #ececec;border-radius:12px;background:#fff}
+.mm .pa{width:30px;height:30px}
+.mm .who{font-weight:600;font-size:14.5px}.mm .who small{font-weight:400;color:#8a8a8a;margin-left:8px}
+.mm p{margin:6px 0 0;font-size:15px;color:#222;max-width:640px}
+.rep{margin-top:16px;border:1px solid #e3e3e3;border-radius:12px;padding:14px 16px;min-height:150px;background:#fff;transition:border-color .15s}
+.rep.fc{border-color:#bdbdbd}
+.rep .txt{font-size:15px;color:#222;max-width:680px;min-height:66px}
+.rep .txt.ph{color:#9a9a9a}
+.acts{display:flex;gap:10px;margin-top:14px}
+.btn2{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border-radius:8px;border:1px solid #e0e0e0;background:#fff;font-size:14px;font-weight:500;color:#111;transition:background .12s,border-color .12s}
+.btn2.hv{background:#f2f2f2;border-color:#cfcfcf}
+.btn2.ai{color:#7c3aed;border-color:rgba(124,58,237,.35);background:rgba(124,58,237,.06)}
+.btn2.ai.hv{background:rgba(124,58,237,.12)}
+.btn2.pri{background:#111;color:#fff;border-color:#111}
+.btn2.pri.hv{background:#333}
+.btn2.off{opacity:.35}
+.toast{position:absolute;left:50%;bottom:24px;transform:translate(-50%,10px);height:40px;padding:0 16px;display:flex;align-items:center;gap:8px;border-radius:10px;background:#111;color:#fff;font-size:14px;opacity:0;transition:opacity .25s,transform .25s;z-index:20}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.pill.stg{transition:background .3s,border-color .3s,color .3s}
+.pill.stg.up{background:rgba(0,96,255,.08);border-color:#93c5fd;color:#1d4ed8}
+.pill.done{background:rgba(0,184,0,.1);border-color:rgba(0,184,0,.35);color:#11883a}
+.chat.big .msgs{height:230px}
+.ans ul{margin:6px 0 0;padding-left:18px}.ans li{margin:2px 0}
+.tip{position:absolute;z-index:30;max-width:340px;padding:10px 12px;border-radius:10px;background:#111;color:#fff;font-size:13px;line-height:1.45;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none}
+.tip.on{opacity:1;transform:none}
+.tip small{display:block;color:#9a9a9a;margin-top:4px}
+</style><div class="sb" id="sb"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Шукай, переходь або проси агента<kbd>⌘K</kbd></div>
+<div class="sbp" id="sbp"><h6>Нещодавні</h6>
+<div class="row" data-s="lead"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Anna Nowak<small>Лід · Lumio · Кваліфікація</small></div>
+<div class="row" data-s="mail"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Re: Комерційна пропозиція<small>Лист · Anna Nowak · вчора</small></div>
+<div class="row" data-s="demo"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Задачі команди<small>Дошка · 7 задач</small></div></div>
+<svg class="ocur" id="ocur" viewBox="0 0 18 22"><path d="M1 1v17l4.6-4.3 3 6.8 2.6-1.1-3-6.6H14z" stroke-width="1.2" stroke-linejoin="round"/></svg><style>#box{width:90%;margin:0 auto}</style></div>
+<div class="wrap"><div class="box" id="box">
+<div class="f" id="f" role="region" aria-label="Aita: лід, задача, агент заповнює, людина призначає виконавця">
+<svg width="0" height="0" style="position:absolute"><symbol id="m" viewBox="0.475 0.467 90.548 81.672"><path fill="currentColor" d="M35.327,8.909C36.329,3.913 40.772,0.355 45.867,0.470C50.779,0.569 54.964,4.065 55.935,8.881C60.018,29.131 70.226,47.636 85.175,61.891C88.832,63.732 91.106,67.509 91.021,71.602C90.943,75.691 88.539,79.379 84.829,81.101C80.259,83.223 74.829,81.870 71.788,77.852C62.947,70.571 52.914,64.871 42.132,61.005C40.636,60.463 39.499,59.223 39.093,57.684C38.598,55.737 39.392,53.691 41.071,52.587C42.410,51.710 44.102,51.571 45.567,52.218C52.059,55.085 58.830,57.276 65.771,58.755C61.269,46.527 54.431,35.292 45.638,25.675C33.311,39.167 24.893,55.762 21.289,73.678C20.420,78.000 16.952,81.325 12.597,82.011C7.497,82.814 2.571,79.788 0.982,74.876C-0.318,70.839 0.935,66.417 4.159,63.661C20.158,49.231 31.086,30.033 35.323,8.909Z"/></symbol></svg>
+<div class="tabs" aria-hidden="true">
+  <div class="tab on" id="t0"><span>Головна</span><i class="n">1</i><i class="x">×</i></div>
+  <div class="tab gone" id="t1"><span>Ліди</span><i class="n">2</i><i class="x" id="x1">×</i></div>
+  <div class="tab gone" id="t2"><span>Завдання</span><i class="n">3</i><i class="x" id="x2">×</i></div>
+  <span class="plus" id="plus"><svg class="i" viewBox="0 0 24 24" style="width:15px"><path d="M12 5v14M5 12h14"/></svg></span>
+</div>
+<div class="top" aria-hidden="true">
+  <div class="brand"><svg class="mk"><use href="#m"/></svg>Aita</div>
+  <div class="tsr" id="tsr"><svg class="i" viewBox="0 0 24 24" style="width:14px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Шукай, переходь або проси агента<kbd>⌘K</kbd></div>
+  <div class="tr">
+    <span class="bd"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+    <span class="bd"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="dot">3</i></span>
+    <span class="av">🦖</span>
+  </div>
+</div>
+<div class="stage">
+  <div class="pg home on" id="pHome">
+    <div class="hero"><svg class="mk"><use href="#m"/></svg>Aita</div>
+    <div class="search" id="srch"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Шукай, переходь або проси агента<kbd>⌘K</kbd></div>
+    <div class="pins">
+      <div class="pin"><b><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8M13 12h8M13 18h8"/></svg></b>Завдання</div>
+      <div class="pin"><b><svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></b>Клієнти</div>
+      <div class="pin"><b><svg class="i" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></b>Проєкти</div>
+      <div class="pin"><b><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></b>Календар</div>
+      <div class="pin"><b><svg class="i" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></b>База знань</div>
+      <div class="pin more"><b>···</b>Ще</div>
+    </div>
+  </div>
+  <div class="pg" id="pLead">
+    <div class="board"><h3>Ліди</h3><div class="cols">
+      <div class="col"><h6>НОВИЙ</h6><div class="cd"></div><div class="cd"></div></div>
+      <div class="col"><h6>КВАЛІФІКАЦІЯ</h6><div class="cd"></div></div>
+      <div class="col"><h6>ПРОПОЗИЦІЯ</h6><div class="cd"></div><div class="cd"></div></div>
+      <div class="col"><h6>ВИГРАНО</h6><div class="cd"></div></div>
+      <div class="col"><h6>ВТРАЧЕНО</h6></div>
+    </div></div>
+    <div class="dim"></div>
+    <div class="md">
+      <div class="mh">
+        <span class="pill"><span class="d"></span>Кваліфікація<svg class="i" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="money">€48 000</span><span class="temp">ТЕПЛИЙ</span>
+        <span class="rt"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      </div>
+      <div class="mb">
+        <div class="ml">
+          <h2>Anna Nowak</h2><div class="em">anna<span>@</span>lumio.example</div>
+          <div class="ds">Хочуть запустити Aita на команду продажів і проєктів до кінця листопада.</div>
+          <div class="sec"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6M18 6a3 3 0 0 0-3 3 3 3 0 0 1-3 3H9"/></svg>Прив'язані задачі<span class="ac"><span><svg class="i" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span id="addT"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></span></div>
+          <div id="tl">
+            <div class="lt"><span class="ck"></span>Демо для команди Lumio<small>Вчора</small><span class="pa av-ol"></span></div>
+          </div>
+        </div>
+        <div class="mr"><h4>Властивості<svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></h4>
+          <div class="pr">
+            <span>Воронка</span><div class="v"><svg class="i" viewBox="0 0 24 24" style="width:15px"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg><b>B2B продажі</b></div>
+            <span>Менеджер</span><div class="v"><span class="pa me">🦖</span>Ви</div>
+            <span>Джерело</span><div class="v">Website <svg class="i" viewBox="0 0 24 24" style="width:12px;color:#8c8c8c"><path d="m6 9 6 6 6-6"/></svg></div>
+            <span>Останній контакт</span><div class="v">Вчора</div>
+            <span>Наступний контакт</span><div class="v mu">Не заплановано</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg" id="pTask">
+    <div class="board"><h3>Задачі</h3><div class="cols">
+      <div class="col"><h6>OPEN</h6><div class="cd"></div><div class="cd"></div><div class="cd"></div></div>
+      <div class="col"><h6>IN PROGRESS</h6><div class="cd"></div><div class="cd"></div></div>
+      <div class="col"><h6>IN REVIEW</h6><div class="cd"></div></div>
+      <div class="col"><h6>BLOCKED</h6><div class="cd"></div></div>
+      <div class="col"><h6>DONE</h6><div class="cd"></div><div class="cd"></div></div>
+    </div></div>
+    <div class="dim"></div>
+    <div class="md">
+      <div class="mh">
+        <svg class="i" viewBox="0 0 24 24" style="color:#8a8a8a"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        <span class="pill" style="font-weight:500">Open<svg class="i" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="pill pri">Medium<svg class="i" viewBox="0 0 24 24" style="color:#1d4ed8"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="rt"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><svg class="i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      </div>
+      <div class="mb">
+        <div class="ml">
+          <h2>Підготувати КП для Lumio</h2>
+          <div class="tds ph" id="tds">Додайте опис…</div>
+          <div class="chk" id="chk">
+            <div class="sec" style="margin-bottom:6px"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Кроки</div><div id="chkSk"><span class="sk" style="width:42%"></span><span class="sk" style="width:38%"></span><span class="sk" style="width:46%"></span></div>
+            <div class="ci" id="c1"><i></i>Порахувати ціну на 24 місця</div>
+            <div class="ci" id="c2"><i></i>Додати план онбордингу</div>
+            <div class="ci" id="c3"><i></i>Надіслати КП Anna Nowak</div>
+          </div>
+          <div class="chat">
+            <div class="ctabs"><span>Чат</span><span>Історія</span></div>
+            <div class="msgs">
+              <div class="msg" id="mU"><span class="pa me">🦖</span><div><div class="who">Ви<small>зараз</small></div><p><span class="mention">@Aita</span> заповни задачу</p></div></div>
+              <div class="msg" id="mA"><span class="pa ai"><svg class="mk"><use href="#m"/></svg></span><div><div class="who">Aita<span class="tag">агент</span><small>зараз</small></div><p id="mAt" class="think">Думаю<i>.</i><i>.</i><i>.</i></p></div></div>
+            </div>
+            <div class="pop men" id="pMen"><div class="it" id="mnA"><span class="pa ai"><svg class="mk"><use href="#m"/></svg></span>Aita<small>агент</small></div><div class="it" id="mnO"><span class="pa av-ol"></span>Олена К.</div><div class="it" id="mnM"><span class="pa av-ma"></span>Марко Б.</div><div class="it" id="mnS"><span class="pa av-so"></span>Софія Л.</div></div>
+            <div class="comp" id="comp">
+              <div class="tx" id="ctx"><span id="ctxt">Введіть повідомлення...</span></div>
+              <div class="bt"><svg class="i" viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg><span class="sp">⌘ + ↵ — надіслати</span><span class="snd" id="snd"><svg class="i" viewBox="0 0 24 24" style="width:14px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="mr"><h4>Властивості<svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></h4>
+          <div class="pr" style="row-gap:34px">
+            <span>Виконавець</span><div class="v"><span class="pick" id="asg"><span id="asgA"></span><span id="asgN" class="mu">Не призначено</span></span>
+              <div class="pop" id="pAsg" style="left:-8px;top:36px;width:250px">
+                <div class="it"><svg class="i" viewBox="0 0 24 24" style="width:14px;color:#8a8a8a"><path d="M18 6 6 18M6 6l12 12"/></svg><span style="color:#8a8a8a">Зняти призначення</span></div>
+                <div class="it"><span class="pa me">🦖</span>Я</div>
+                <div class="sep"></div>
+                <div class="gl">Моя команда</div>
+                <div class="it"><span class="pa av-ol"></span>Олена К.<small>Продажі</small></div>
+                <div class="it" id="aM"><span class="pa av-ma"></span>Марко Б.<small>Продажі</small></div>
+                <div class="it"><span class="pa av-so"></span>Софія Л.<small>Маркетинг</small></div>
+                <div class="it"><span class="pa av-da"></span>Давид Р.<small>Проєкти</small></div>
+                <div class="it"><span class="pa av-iv"></span>Іван Т.<small>Фінанси</small></div>
+                <div class="it"><span class="pa av-ta"></span>Тарас П.<small>Розробка</small></div>
+              </div></div>
+            <span>Строк</span><div class="v" id="due"><span class="mu">Без строку</span></div>
+            <span>Лід</span><div class="v">Anna Nowak · Lumio</div>
+            <span>Рев'юери</span><div class="v mu">Немає</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg" id="pMail"><style>
+.mp{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff}
+.mp-top{height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid #ececec;font-size:15px;font-weight:600}
+.mp-top .seg{font-weight:500;font-size:12.5px;border:1px solid #e3e3e3;border-radius:6px;padding:2px 8px;color:#555}
+.mp-top .sync{margin-left:auto;font-size:12px;color:#8a8a8a;font-weight:400;display:flex;gap:10px;align-items:center}
+.mp-top .sync span{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:#111;border:1px solid #e3e3e3;border-radius:6px;padding:4px 9px}
+.mp-body{flex:1;display:grid;grid-template-columns:300px 1fr;min-height:0}
+.mp-list{border-right:1px solid #ececec;overflow:hidden}
+.mp-q{margin:10px;height:34px;border:1px solid #e3e3e3;border-radius:8px;background:#fafafa;display:flex;align-items:center;gap:8px;padding:0 10px;color:#9a9a9a;font-size:13px}
+.mp-it{display:grid;grid-template-columns:18px 1fr auto;column-gap:8px;row-gap:2px;padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:13px}
+.mp-it>svg.i{color:#2f6fed;width:15px;height:15px;margin-top:2px}
+.mp-it b{font-weight:600;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-it small{color:#8a8a8a;font-size:11.5px}
+.mp-it span{grid-column:2/4;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-it.act{background:#eef4ff}
+.mp-th{display:flex;flex-direction:column;min-height:0;background:#fafafa}
+.mp-hd{padding:12px 18px 10px;border-bottom:1px solid #ececec}
+.mp-back{font-size:12.5px;color:#555}
+.mp-sub{font-size:17px;font-weight:600;margin:5px 0 2px}
+.mp-meta{font-size:12px;color:#8a8a8a;display:flex;gap:8px;align-items:center}
+.mp-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border:1px solid #e3e3e3;border-radius:999px;background:#fff;font-size:11.5px;color:#333;transition:background .3s,border-color .3s,color .3s}
+.mp-chip .d{width:6px;height:6px;border-radius:50%;background:#8c8c8c}
+.mp-chip.up{background:rgba(0,96,255,.08);border-color:#93c5fd;color:#1d4ed8}.mp-chip.up .d{background:#0060ff}
+.mp-acts{display:flex;gap:6px;margin-top:9px}
+.mp-acts .r{margin-left:auto;display:flex;gap:6px}
+.mp-b{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid #e0e0e0;border-radius:6px;background:#fff;font-size:12.5px;color:#111;transition:background .12s}
+.mp-b.pri{background:#2f6fed;border-color:#2f6fed;color:#fff}
+.mp-b.hv{background:#f2f2f2}.mp-b.pri.hv{background:#1f5fd9}.mp-b.pri.off{opacity:.45}
+.mp-msg{margin:12px 18px 0}
+.mp-mh{display:flex;align-items:center;gap:10px;font-size:13px}
+.mp-mh .av2{width:26px;height:26px;border-radius:6px;background:#ececec;display:grid;place-items:center;font-size:10px;font-weight:600;color:#555;flex:none}
+.mp-mh b{font-weight:600}.mp-mh small{color:#8a8a8a}
+.mp-mh .when{margin-left:auto;font-size:11.5px;color:#8a8a8a}
+.mp-msg p{margin:8px 0 0 36px;font-size:14px;color:#222;background:#fff;border:1px solid #ececec;border-radius:10px;padding:12px 14px;line-height:1.5}
+.mp-rep{margin-top:auto;border-top:1px solid #e3e3e3;background:#f4f4f4;padding:10px 18px 12px}
+.mp-rh{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#555}.mp-rh b{color:#111;font-weight:600}
+.mp-rh .tg{display:inline-flex;align-items:center;gap:5px;border:1px solid #e3e3e3;border-radius:6px;background:#fff;padding:2px 7px;font-size:12px;color:#333}
+.mp-to{margin-top:8px;height:30px;border:1px solid #e3e3e3;border-radius:6px;background:#fff;display:flex;align-items:center;padding:0 10px;font-size:13px}
+.mp-subj{margin-top:6px;font-size:12px;color:#8a8a8a}.mp-subj b{color:#111;font-weight:500}
+.mp-ta{margin-top:6px;min-height:96px;border:1px solid #9ab8f5;border-radius:6px;background:#fff;padding:8px 10px;font-size:13.5px;line-height:1.5;color:#222}
+.mp-ta.ph{color:#9a9a9a;border-color:#e3e3e3}
+.mp-ft{display:flex;align-items:center;gap:8px;margin-top:8px}
+.mp-ft .sp2{margin-left:auto}
+.mp-ai{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border:1px solid rgba(124,58,237,.35);border-radius:6px;background:rgba(124,58,237,.06);color:#7c3aed;font-size:12.5px;font-weight:500;transition:background .12s}
+.mp-ai.hv{background:rgba(124,58,237,.12)}
+.mp-toast{position:absolute;right:18px;bottom:74px;height:38px;padding:0 14px;display:flex;align-items:center;gap:8px;border-radius:8px;background:#111;color:#fff;font-size:13px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;z-index:20}
+.mp-toast.on{opacity:1;transform:none}
+.kb{position:absolute;inset:0;padding:14px 18px;background:#fff}
+.kb-h{display:flex;align-items:center;gap:14px;height:36px;margin-bottom:12px}
+.kb-h b{font-size:17px}
+.kb-seg{display:flex;background:#f2f2f2;border-radius:7px;padding:2px;font-size:12.5px}
+.kb-seg span{padding:4px 10px;border-radius:5px;color:#555}.kb-seg span.on{background:#fff;color:#111;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.kb-sort{font-size:12.5px;color:#8a8a8a}.kb-sort b{font-size:12.5px;color:#111;font-weight:600}
+.kb-f{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#555}
+.kb-cols{display:flex;gap:12px;height:540px}
+.kb-col{flex:1;border:1px solid #ececec;border-radius:12px;background:#fafafa;display:flex;flex-direction:column;transition:background .15s,border-color .15s}
+.kb-col.drop{background:#f0f5ff;border-color:#bcd3ff}
+.kb-ch{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-bottom:1px solid #ececec;font-size:12px;font-weight:600;letter-spacing:.06em}
+.kb-ch i{width:8px;height:8px;border-radius:50%}
+.kb-ch em{margin-left:auto;font-style:normal;font-weight:500;letter-spacing:0;font-size:11px;color:#777;background:#ececec;border-radius:999px;padding:1px 7px}
+.kb-cards{padding:10px;flex:1}
+.kb-add{display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:12.5px;color:#666}
+.kc{position:relative;padding:9px 11px;border:1px solid #e6e6e6;border-radius:10px;background:#fff;margin-bottom:9px;font-size:13.5px;color:#111;transition:box-shadow .15s,border-color .15s}
+.kc .kid{display:flex;align-items:center;gap:6px;font:11.5px ui-monospace,monospace;color:#777}
+.kc .kid i{width:6px;height:6px;border-radius:50%}
+.kc .pr2{margin-left:auto;font:500 10px "Golos Text";border:1px solid #93c5fd;color:#1d4ed8;border-radius:4px;padding:0 5px}
+.kc .pr2.h{border-color:#fdba74;color:#c2410c}.kc .pr2.l{border-color:#d4d4d4;color:#777}
+.kc .kt{margin:5px 0 7px;font-weight:500;line-height:1.3}
+.kc .kr{display:flex;align-items:center;gap:6px;font-size:11px;color:#777}
+.kc .kr .pa{width:20px;height:20px}
+.kc .kr .ch2{display:inline-flex;align-items:center;gap:4px;border:1px solid #e6e6e6;border-radius:5px;padding:1px 6px}
+.kc .kr .dt{margin-left:auto;display:inline-flex;align-items:center;gap:3px}
+.kc.drag{box-shadow:0 14px 34px rgba(0,0,0,.18);z-index:30}
+.kc.hv{border-color:#cfcfcf}
+.kc.new{animation:fr 1.2s ease-out}
+.tsg{display:grid;grid-template-columns:1fr 1fr;background:#f2f2f2;border-radius:8px;padding:3px;font-size:13.5px;text-align:center;margin-bottom:10px}
+.tsg span{padding:5px 0;border-radius:6px;color:#555;transition:background .15s}
+.tsg span.on{background:#fff;color:#111;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.tsg span.hv{color:#111}
+.hs{display:flex;flex-direction:column;gap:11px}
+.hs .e{display:flex;gap:10px;font-size:13.5px;color:#222}
+.hs .e .pa{width:24px;height:24px}
+.hs .e b{font-weight:600}.hs .e small{color:#8a8a8a;margin-left:6px;font-size:12px}
+.hs .e .q{margin-top:3px;padding-left:8px;border-left:2px solid #e3e3e3;font-size:12px;color:#555}
+.hs .sys{color:#555}.hs .sys b{color:#111}
+.chk2 .bar{height:4px;border-radius:2px;background:#ececec;margin:6px 0 8px;overflow:hidden}.chk2 .bar i{display:block;height:100%;width:100%;background:#16a34a}
+.chk2 .ci2{display:flex;align-items:center;gap:10px;height:26px;font-size:14px;color:#777;text-decoration:line-through}
+.chk2 .ci2 i{width:15px;height:15px;border-radius:3px;background:#16a34a;display:grid;place-items:center;color:#fff;font-style:normal;font-size:10px}
+.pill.dn2{border-color:#86efac;color:#15803d}
+.stp{position:absolute;z-index:9;border:1px solid #e3e3e3;border-radius:10px;background:#fff;padding:5px;display:none;box-shadow:0 12px 32px rgba(0,0,0,.12);font-size:14px;width:190px}
+.stp.on{display:block}
+.stp .it{display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;border-radius:6px;color:#111}
+.stp .it.hv{background:#f2f2f2}.stp .it i{width:7px;height:7px;border-radius:50%;background:#8c8c8c}.stp .it.cur2{font-weight:600}
+.cal{position:absolute;z-index:9;width:250px;border:1px solid #e3e3e3;border-radius:12px;background:#fff;box-shadow:0 12px 32px rgba(0,0,0,.12);display:none;font-size:13.5px}
+.cal.on{display:block}
+.cal-h{display:flex;align-items:center;justify-content:space-between;padding:10px 10px 6px}
+.cal-h b{font-weight:600}.cal-h span{width:26px;height:26px;border:1px solid #e3e3e3;border-radius:6px;display:grid;place-items:center;color:#555}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:0 8px 8px;text-align:center}
+.cal-g s{text-decoration:none;font-size:11.5px;color:#8a8a8a;padding:4px 0}
+.cal-g u{text-decoration:none;height:30px;display:grid;place-items:center;border-radius:7px;color:#111;border:1.5px solid transparent}
+.cal-g u.o{color:#bbb}.cal-g u.td{border-color:#16a34a;font-weight:600}.cal-g u.sel{background:#16a34a;color:#fff;font-weight:600}.cal-g u.hv{background:#f2f2f2}
+.cal-f{border-top:1px solid #ececec;padding:9px 12px;color:#555;font-size:13px}
+</style><div class="mp" style="background:#fafafa">
+    <div class="mp-hd" style="background:#fff;padding:18px 28px 14px"><div class="mp-sub" style="font-size:20px;margin:0 0 6px">Re: Комерційна пропозиція</div>
+      <div class="mp-meta"><span>Anna Nowak · Lumio</span><span class="mp-chip" id="lChip"><span class="d"></span><span>Лід · <span id="lChipT">Кваліфікація</span></span></span></div></div>
+    <div id="thr" style="padding:6px 28px 0">
+      <div class="mp-msg" style="margin:16px 0 0"><div class="mp-mh"><span class="pa" style="width:30px;height:30px;background:#eee url(&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Anna%20Nowak&quot;) center/cover"></span><b>Anna Nowak</b><span class="when">вчора, 18:42</span></div>
+        <p style="margin-left:40px;font-size:15px">Добрий день! Подивились КП. Чи можлива оплата частинами? І чи встигнемо стартувати до кінця листопада?</p></div>
+      <div class="mp-msg" id="sent" style="margin:14px 0 0;display:none"><div class="mp-mh"><span class="pa me" style="width:30px;height:30px">🦖</span><b>Ви</b><span class="when" style="color:#16a34a">✓ Надіслано · щойно</span></div>
+        <p style="margin-left:40px;font-size:15px;background:#f3f7ff;border-color:#dbe6ff" id="sentT"></p></div>
+    </div>
+    <div class="mp-rep" id="repBox" style="background:#fff;padding:14px 28px 16px;transition:opacity .3s">
+      <div class="mp-ta ph" id="repT" style="min-height:84px;font-size:15px">Напишіть відповідь…</div>
+      <div class="src" id="repS" style="display:none"><span id="sKP"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>КП для Lumio</span><span><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Дзвінок 14.10</span></div>
+      <div class="mp-ft"><span class="mp-ai" id="bAi"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>Написати з Aita</span><span class="sp2"></span><span class="mp-b pri off" id="bSend" style="height:32px;padding:0 14px"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>Надіслати</span></div>
+    </div>
+    <div class="mp-toast" id="toast">✓ Лист надіслано · лід перейшов у «Пропозиція»</div>
+  </div></div>
+  <div class="pg" id="pDemo">
+    <div class="kb"><div class="kb-h"><b>Задачі</b><div class="kb-seg"><span class="on">Усі</span><span>Мої задачі</span></div><span class="kb-sort">Сортування: <b>Створено</b> ↓</span><span class="kb-f"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg>Фільтр</span></div><div class="kb-cols"><div class="kb-col" id="cOpen"><div class="kb-ch"><i style="background:#8c8c8c"></i>OPEN<em>3</em></div><div class="kb-cards"><div class="kc" id="kKP"><div class="kid"><i style="background:#8c8c8c"></i>tsk_k8Pq2Lm<span class="pr2 ">Medium</span></div><div class="kt">Підготувати КП для Lumio</div><div class="kr"><span class="pa av-ma"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Lumio</span><span class="dt"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>23 жовт.</span></div></div><div class="kc"><div class="kid"><i style="background:#8c8c8c"></i>tsk_3nVb7Xa<span class="pr2 l">Low</span></div><div class="kt">Онбординг команди Lumio</div><div class="kr"><span class="pa av-so"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Lumio</span><span class="dt"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 лист.</span></div></div><div class="kc"><div class="kid"><i style="background:#8c8c8c"></i>tsk_Qw9Re1t<span class="pr2 ">Medium</span></div><div class="kt">Запит на демо Bright Energy</div><div class="kr"><span class="pa av-iv"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Bright Energy</span></div></div></div><div class="kb-add"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 5v14M5 12h14"/></svg>Додати задачу</div></div><div class="kb-col" id="cProg"><div class="kb-ch"><i style="background:#2f6fed"></i>IN PROGRESS<em>1</em></div><div class="kb-cards"><div class="kc"><div class="kid"><i style="background:#2f6fed"></i>tsk_Zx4Cv8b<span class="pr2 h">High</span></div><div class="kt">Інтеграція пошти Lumio</div><div class="kr"><span class="pa av-ta"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Lumio</span><span class="dt"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>22 жовт.</span></div></div></div><div class="kb-add"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 5v14M5 12h14"/></svg>Додати задачу</div></div><div class="kb-col" id="cRev"><div class="kb-ch"><i style="background:#9333ea"></i>IN REVIEW<em>1</em></div><div class="kb-cards"><div class="kc"><div class="kid"><i style="background:#9333ea"></i>tsk_Mn2Bv5c<span class="pr2 ">Medium</span></div><div class="kt">Договір для Kraft Studio</div><div class="kr"><span class="pa av-da"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Kraft Studio</span></div></div></div><div class="kb-add"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 5v14M5 12h14"/></svg>Додати задачу</div></div><div class="kb-col" id="cBlk"><div class="kb-ch"><i style="background:#dc2626"></i>BLOCKED<em>0</em></div><div class="kb-cards"></div><div class="kb-add"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 5v14M5 12h14"/></svg>Додати задачу</div></div><div class="kb-col" id="cDone"><div class="kb-ch"><i style="background:#16a34a"></i>DONE<em>2</em></div><div class="kb-cards"><div class="kc"><div class="kid"><i style="background:#16a34a"></i>tsk_Lp0Ok9i<span class="pr2 ">Medium</span></div><div class="kt">Демо для команди Lumio</div><div class="kr"><span class="pa av-ol"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Lumio</span><span class="dt"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>14 жовт.</span></div></div><div class="kc"><div class="kid"><i style="background:#16a34a"></i>tsk_Uy6Tr3e<span class="pr2 l">Low</span></div><div class="kt">Дзвінок з Lumio</div><div class="kr"><span class="pa av-ol"></span><span class="ch2"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Lumio</span><span class="dt"><svg class="i" viewBox="0 0 24 24" style="width:11px;height:11px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>13 жовт.</span></div></div></div><div class="kb-add"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M12 5v14M5 12h14"/></svg>Додати задачу</div></div></div></div>
+    <i hidden></i>
+    <i hidden></i>
+  </div>
+</div>
+<svg class="cur" id="cur" viewBox="0 0 18 22"><path d="M1 1v17l4.6-4.3 3 6.8 2.6-1.1-3-6.6H14z" stroke-width="1.2" stroke-linejoin="round"/></svg>
+</div>
+</div></div>
+</div></div>
+</template><template id="hwT3"><script>
+(function(){
+var $=function(i){return document.getElementById(i)},F=$("f"),BOX=$("box"),C=$("cur"),K=1,cx=0,cy=0,H=720;
+var open=false;function fit(){K=BOX.clientWidth/1440;F.style.transform="scale("+K+")";BOX.style.height=open?Math.round(H*K)+"px":"0px";$("demo").style.minHeight="64px";if(typeof sbHome==="function"&&!morphing)sbHome(false)}
+function openBox(v){open=v;BOX.style.opacity=v?1:0;fit()}
+var paused=false,morphing=false;
+function sleep(ms){return new Promise(function(r){var left=ms,last=performance.now();(function tick(){var t=performance.now();if(!paused)left-=t-last;last=t;left<=0?r():setTimeout(tick,Math.max(10,Math.min(left,50)))})()})}
+function rnd(a,b){return a+Math.random()*(b-a)}
+var HS=".search,.lt,.pick,.pop .it,.tab,.tab .x,.plus,.sec .ac span,.snd,.src span,.pill,.stp .it,.cal-g u,.mp-b,.mp-ai,.tsg span,.kc,#dClose",hov=[];
+function hover(){var q=F.getBoundingClientRect(),e=document.elementFromPoint(q.left+(cx+1)*K,q.top+(cy+1)*K),now=[];
+  while(e&&e!==F){if(e.matches&&e.matches(HS))now.push(e);e=e.parentElement}
+  hov.forEach(function(x){if(now.indexOf(x)<0)x.classList.remove("hv")});now.forEach(function(x){x.classList.add("hv")});hov=now}
+function setC(x,y){cx=x;cy=y;C.style.transform="translate("+x+"px,"+y+"px)";hover()}
+function at(el,dx,dy){var r=el.getBoundingClientRect(),q=F.getBoundingClientRect(),w=r.width/K,h=r.height/K,x=dx==null?w*rnd(.32,.68):Math.max(4,Math.min(w-4,dx+rnd(-10,10))),y=dy==null?h*rnd(.3,.7):Math.max(3,Math.min(h-3,dy+rnd(-4,4)));return [(r.left-q.left)/K+x,(r.top-q.top)/K+y]}
+function seg(x1,y1,d,bend){var x0=cx,y0=cy,el=0,last=performance.now(),ph=rnd(0,6.28);
+  return new Promise(function(r){(function f(t){if(!paused)el+=t-last;last=t;var k=Math.min(1,el/d),e=1-Math.pow(1-k,3.2),s=Math.sin(Math.PI*e),jit=(1-k)*Math.sin(t/38+ph)*.6;
+    setC(x0+(x1-x0)*e-(y1-y0)*bend*s+jit,y0+(y1-y0)*e+(x1-x0)*bend*s+jit*.7);k<1?requestAnimationFrame(f):r()})(last)})}
+async function move(el,dx,dy,dur){var p=Array.isArray(el)?[el[0]+rnd(-6,6),el[1]+rnd(-6,6)]:at(el,dx,dy),x1=p[0],y1=p[1],
+  vx=x1-cx,vy=y1-cy,dist=Math.hypot(vx,vy)||1,ux=vx/dist,uy=vy/dist,d=dur||Math.min(1050,300+dist*.72),bend=rnd(-.09,.09);
+  await seg(x1,y1,d,bend);
+  await seg(cx+ux*rnd(.5,2),cy+uy*rnd(.5,2),rnd(120,200),0)}
+async function click(){C.classList.add("dn");await sleep(100);C.classList.remove("dn");await sleep(70)}
+function on(id,v){$(id).classList.toggle("on",v)}
+function hv(id,v){var e=$(id);if(e)e.classList.toggle("hv",v)}
+function tabs(n){["t0","t1","t2"].forEach(function(t,i){var e=$(t);e.classList.toggle("gone",!n[i]);e.classList.remove("on","hv")})}
+function act(i){$("t"+i).classList.add("on");["t0","t1","t2"].forEach(function(t,j){if(j!==i)$(t).classList.remove("on")})}
+function page(id){["pHome","pLead","pTask","pMail","pDemo"].forEach(function(p){on(p,p===id)});on("tsr",id!=="pHome");hover()}
+async function typeTo(el,s,pre,post,f){f=f||1;for(var i=0;i<s.length;i++){el.innerHTML=(pre||"")+esc(s.slice(0,i+1))+(post||"");await sleep((s[i]===" "?rnd(90,150):rnd(50,110))*f)}}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+// вбудовано в головну: тут лише рядок пошуку й вікно; висоту, прокрутку сторінки й смугу з кнопками веде головна
+(function(){var st=document.createElement("style");st.textContent="html,body{background:#fff}.pg0{padding:0 80px 288px}.pg0 h1,.pg0 .sub{text-align:center}.pg0 .sub{margin-left:auto;margin-right:auto}.sbw{position:absolute!important;z-index:40;max-width:none;transform:none!important}.sbw.anim{transition:left 1s cubic-bezier(.4,0,.2,1),top 1s cubic-bezier(.4,0,.2,1),width 1s cubic-bezier(.4,0,.2,1),opacity .25s}.sbw.anim .sb{transition:height 1s cubic-bezier(.4,0,.2,1),font-size 1s,padding 1s,gap 1s,border-color .2s,background .2s,box-shadow .2s}.sbw.anim .sb svg.i{transition:width 1s,height 1s}.sbw.gone{opacity:1}.sbw.hide{opacity:0;pointer-events:none}.sbw.anim.slow{transition-duration:.6s}.sbw.anim.slow .sb{transition-duration:.6s}.stp .it i,.pill#lStg .d{transition:background .3s}.lt.fresh{animation:none}.sb kbd{transition:opacity .3s,transform 1s cubic-bezier(.4,0,.2,1);transform-origin:100% 50%}.sbw.anim.slow .sb kbd{transition-duration:.6s}";document.head.appendChild(st)})();
+function sbGeo(l,t,w,hh,fs,pad,ic,gap){var s=$("sbw"),b=$("sb"),i=b.querySelector("svg");s.style.left=l+"px";s.style.top=t+"px";s.style.width=w+"px";b.style.height=hh+"px";b.style.fontSize=fs+"px";b.style.padding="0 "+pad+"px";b.style.gap=gap+"px";i.style.width=i.style.height=ic+"px"}
+function sbHome(anim){var d=$("demo"),w=Math.min(720,d.clientWidth);$("sbw").classList.toggle("anim",!!anim);sbGeo((d.clientWidth-w)/2,0,w,64,17,22,20,13.2);$("sb").querySelector("kbd").style.transform=""}
+// маленький пошук сідає точно на пошук платформи (з урахуванням рамки вікна, відступу й ⌘K) — інакше в кінці підмина смикається
+function sbToBar(anim){var q=$("demo").getBoundingClientRect(),bx=BOX.getBoundingClientRect(),bw=BOX.clientLeft;
+  var l=bx.left-q.left+bw+(1440/2-280)*K,tp=bx.top-q.top+bw+(44+7)*K;$("sbw").classList.toggle("anim",!!anim);sbGeo(l,tp,560*K,32*K,13.5*K,12*K,14*K,10*K);
+  var sk=$("sb").querySelector("kbd"),tk=$("tsr").querySelector("kbd"),t0=sk.style.transform;sk.style.transition="none";sk.style.transform="";var r=tk.getBoundingClientRect().height/sk.getBoundingClientRect().height;sk.style.transform=t0;sk.offsetWidth;sk.style.transition="";sk.style.transform="scale("+r+")"}
+fit();addEventListener("resize",fit);
+// стадія ліда (з кольорами) й календар строку — як у платформі
+(function(){
+  var lp=document.querySelector("#pLead .mh .pill");lp.id="lStg";lp.style.transition="background .3s,border-color .3s,color .3s";
+  lp.innerHTML='<span class="d" style="background:#f59e0b"></span><span id="lStgT">Кваліфікація</span><svg class="i" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>';
+  lp.parentNode.style.position="relative";
+  lp.insertAdjacentHTML("afterend",'<div class="stp" id="pStg" style="left:20px;top:46px">'+[["Новий","#8c8c8c"],["Кваліфікація","#f59e0b"],["Пропозиція","#2f6fed"],["Виграно","#16a34a"],["Втрачено","#dc2626"]].map(function(s){return '<div class="it'+(s[0]==="Кваліфікація"?" cur2":"")+'"'+(s[0]==="Пропозиція"?' id="stgP"':"")+'><i style="background:'+s[1]+'"></i>'+s[0]+'</div>'}).join("")+'</div>');
+  var g='<s>Пн</s><s>Вт</s><s>Ср</s><s>Чт</s><s>Пт</s><s>Сб</s><s>Нд</s>';[28,29,30].forEach(function(x){g+='<u class="o">'+x+'</u>'});
+  for(var i=1;i<=31;i++)g+='<u'+(i===21?' class="td"':'')+(i===23?' id="d23"':'')+'>'+i+'</u>';
+  g+='<u class="o">1</u>';
+  var pr=$("due").parentNode;pr.style.position="relative";
+  pr.insertAdjacentHTML("beforeend",'<div class="cal" id="pDue"><div class="cal-h"><span>‹</span><b>Жовтень 2026</b><span>›</span></div><div class="cal-g">'+g+'</div><div class="cal-f">× Очистити строк</div></div>');
+})();
+document.querySelector("#cRev .kc").id="kKR";
+function cnt(){["cOpen","cProg","cRev","cBlk","cDone"].forEach(function(c){$(c).querySelector("em").textContent=$(c).querySelectorAll(".kc").length})}
+function reset(){
+  page("pHome");tabs([1,0,0]);act(0);
+  ["pAsg","chk","c1","c2","c3","mU","mA"].forEach(function(i){on(i,false)});
+  var n=$("tnew");if(n)n.remove();
+  $("tds").textContent="Додайте опис…";$("tds").classList.add("ph");
+  $("mAt").className="think";$("mAt").innerHTML="Думаю<i>.</i><i>.</i><i>.</i>";
+  $("ctxt").textContent="Введіть повідомлення...";$("comp").classList.remove("fc");$("snd").classList.remove("rd");on("pMen",false);$("chkSk").style.display="";
+  $("asgA").innerHTML="";$("asgN").textContent="Не призначено";$("asgN").className="mu";
+  ["srch","addT","asg","aM","x1","x2","plus","mnA"].forEach(function(i){hv(i,false)});
+  $("lStgT").textContent="Кваліфікація";$("lStg").style.cssText="transition:background .3s,border-color .3s,color .3s";$("lStg").querySelector(".d").style.background="#f59e0b";on("pStg",false);
+  [].forEach.call($("pStg").children,function(x){x.classList.toggle("cur2",x.textContent==="Кваліфікація")});
+  $("due").innerHTML='<span class="pick" id="dueP"><span class="mu">Без строку</span></span>';on("pDue",false);$("d23").classList.remove("sel");
+  $("repT").textContent="Напишіть відповідь…";$("repT").className="mp-ta ph";$("repS").style.display="none";$("repBox").style.display="";$("sent").style.display="none";
+  $("bSend").classList.add("off");$("lChip").classList.remove("up");$("lChipT").textContent="Кваліфікація";on("toast",false);
+  var k=$("kKP"),oc=$("cOpen").querySelector(".kb-cards");k.querySelector(".kid i").style.background="#8c8c8c";k.style.transform="";k.classList.remove("drag","new");oc.insertBefore(k,oc.firstChild);
+  var kr=$("kKR"),rc=$("cRev").querySelector(".kb-cards");kr.style.transform="";kr.classList.remove("drag","new");kr.querySelector(".kid i").style.background="#9333ea";rc.insertBefore(kr,rc.firstChild);
+  ["cProg","cDone"].forEach(function(c){$(c).classList.remove("drop")});cnt();
+}
+// лід: людина міняє стадію, ставить задачу, призначає й дає строк (≈14 с)
+async function sLead(){
+  await sleep(200);
+  await move($("lStg"),null,null,600);await sleep(180);await click();on("pStg",true);
+  await sleep(300);await move($("stgP"),40,null,380);await sleep(200);await click();
+  on("pStg",false);$("lStgT").textContent="Пропозиція";$("lStg").style.cssText="transition:background .3s,border-color .3s,color .3s;background:rgba(47,111,237,.08);border-color:#93c5fd;color:#1d4ed8";$("lStg").querySelector(".d").style.background="#2f6fed";
+  [].forEach.call($("pStg").children,function(x){x.classList.toggle("cur2",x.id==="stgP")});
+  await sleep(200);
+  await move($("addT"),null,null,560);await sleep(150);await click();
+  var r=document.createElement("div");r.className="lt newrow typing";r.id="tnew";r.innerHTML='<span class="ck"></span><span id="tnT"></span>';
+  $("tl").insertBefore(r,$("tl").firstChild);
+  await sleep(250);await typeTo($("tnT"),"Підготувати КП для Lumio","",'<span class="caret"></span>',.25);
+  await sleep(150);r.className="lt fresh";r.innerHTML='<span class="ck"></span>Підготувати КП для Lumio<small>Без строку</small>';
+  await sleep(250);await move(r,150,null,450);await sleep(150);await click();
+  page("pTask");tabs([1,1,1]);act(2);
+  await sleep(350);
+  await move($("asg"),56,null,560);await sleep(180);await click();on("pAsg",true);
+  await sleep(350);await move($("aM"),70,null,420);await sleep(220);await click();
+  on("pAsg",false);$("asgA").innerHTML='<span class="pa av-ma"></span>';$("asgN").textContent="Марко Б.";$("asgN").className="";
+  await sleep(250);
+  var pd=$("pDue");pd.style.left=($("due").offsetLeft-8)+"px";pd.style.top=($("due").offsetTop+30)+"px";
+  await move($("dueP"),null,null,480);await sleep(180);await click();on("pDue",true);
+  await sleep(300);await move($("d23"),null,null,400);await sleep(220);await click();$("d23").classList.add("sel");
+  await sleep(250);on("pDue",false);$("due").innerHTML='<span class="pick" id="dueP"><svg class="i" viewBox="0 0 24 24" style="width:14px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><b>23 жовт. 2026 р.</b></span>';
+  await sleep(600);
+}
+// лист: агент пише відповідь з джерелами, людина надсилає — лист з'являється в треді, лід іде далі (≈11 с)
+async function sMail(){
+  await sleep(600);
+  await move($("bAi"),null,null,700);await sleep(250);await click();
+  $("repT").className="mp-ta";$("repT").style.fontSize="15px";$("repT").innerHTML='<span class="sk" style="width:94%"></span><span class="sk" style="width:80%"></span><span class="sk" style="width:52%"></span>';
+  await sleep(1500);
+  var txt="Добрий день, Анно! Так, оплата 50/50: половина після підпису, решта — після запуску. Старт встигаємо до 30 листопада. Оновлене КП надішлю сьогодні.";
+  $("repT").textContent=txt;$("repS").style.display="";$("bSend").classList.remove("off");
+  await sleep(1300);
+  await move($("bSend"),null,null,650);await sleep(250);await click();
+  $("repBox").style.display="none";$("sentT").textContent=txt;$("sent").style.display="";on("toast",true);hover();
+  await sleep(600);$("lChip").classList.add("up");$("lChipT").textContent="Пропозиція";
+  await sleep(2600);on("toast",false);await sleep(500);
+}
+// дошка команди: людина рухає роботу — бере КП у роботу, приймає перевірений договір (≈10 с)
+async function drag(k,toId,dy){
+  await move(k,120,30,650);await sleep(220);
+  C.classList.add("dn");k.classList.add("drag");var sx=cx,sy=cy,tc=$(toId),tb=tc.getBoundingClientRect(),q=F.getBoundingClientRect();
+  var tx=(tb.left-q.left)/K+150,ty=(tb.top-q.top)/K+dy;
+  var mv=function(){k.style.transform="translate("+(cx-sx)+"px,"+(cy-sy)+"px) rotate(1.5deg)";tc.classList.toggle("drop",cx>(tb.left-q.left)/K-20)};
+  var st=setC;setC=function(x,y){st(x,y);mv()};
+  await seg(tx,ty,850,.04);await sleep(220);
+  setC=st;C.classList.remove("dn");k.classList.remove("drag");k.style.transform="";tc.classList.remove("drop");
+  var cc=tc.querySelector(".kb-cards");cc.insertBefore(k,cc.firstChild);k.classList.add("new");cnt();
+}
+async function sDemo(){
+  await sleep(700);
+  await drag($("kKP"),"cProg",110);$("kKP").querySelector(".kid i").style.background="#2f6fed";
+  await sleep(900);
+  var kr=$("kKR");kr.querySelector(".kid i").style.background="#9333ea";
+  await drag(kr,"cDone",110);kr.querySelector(".kid i").style.background="#16a34a";
+  await sleep(1600);
+}
+// на старті — лише рядок пошуку; відео стартує після вибору
+var chose=null;
+$("sb").addEventListener("click",function(){$("sb").classList.add("op");on("sbp",true);if(window.AP){AP.on=false;O.classList.remove("vis")}sbText(null);filt("")});
+document.addEventListener("click",function(ev){if(!ev.target.closest("#sbw")){$("sb").classList.remove("op");on("sbp",false)}});
+$("sbp").addEventListener("click",function(ev){var r=ev.target.closest(".row");if(r&&chose){var f=chose;chose=null;f(r.dataset.s)}});
+var SC={lead:["pLead","Ліди",sLead],mail:["pMail","Пошта",sMail],demo:["pDemo","Задачі",sDemo]};
+// якщо відвідувач не натискає пошук — вибір програється сам: уперше через 1,2 с, між показами через 3 с; по черзі 2, 1, 3
+var FIRST=true,AUTO=[1,0,2],an=0,played=0,O=$("ocur"),ox=0,oy=0,D=$("demo");
+// текст у рядку пошуку (його вписує авто-курсор)
+(function(){var b=$("sb"),t=[].filter.call(b.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()})[0];var sp=document.createElement("span");sp.id="sbT";sp.textContent=t.textContent;b.replaceChild(sp,t);
+  var st=document.createElement("style");st.textContent="#sbT.ty{color:#111}#sbT .cr2{display:inline-block;width:1.5px;height:1.1em;background:#111;vertical-align:-3px;margin-left:1px;animation:bl 1s steps(1) infinite}";document.head.appendChild(st)})();
+var PH="Шукай, переходь або проси агента";
+function sbText(s){var e=$("sbT");if(s==null){e.className="";e.textContent=PH}else{e.className="ty";e.innerHTML=esc(s)+'<span class="cr2"></span>'}}
+// результати пошуку: крім 3 «Нещодавніх» є ще записи демо-компанії — видно лише, коли щось набрано
+(function(){var ar='<svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  $("sbp").insertAdjacentHTML("beforeend",[["rAnd","lead","Andrii Kovalenko","Контакт · Kraft Studio"],["rAng","lead","Angela Ruiz","Лід · Bright Energy · Новий"],["rKosh","mail","Кошторис для Lumio","Файл · xlsx · 12 жовт."],["rKom","demo","Команда продажу","Канал · 5 учасників"],["rZap","demo","Запуск Lumio","Проєкт · 7 задач"],["rTsk","demo","Задача: Підготувати КП","Задача · Марко Б. · Open"]].map(function(x){return '<div class="row rx" id="'+x[0]+'" data-s="'+x[1]+'" style="display:none">'+ar+x[2]+'<small>'+x[3]+'</small></div>'}).join(""))})();
+// фільтр за набраним текстом (порожньо — лише «Нещодавні»); результатів не більше 4 — щоб меню вміщалося над смугою з кнопками
+function filt(q){q=(q||"").toLowerCase();var n=0;[].forEach.call(document.querySelectorAll("#sbp .row"),function(r){var m=r.textContent.toLowerCase().indexOf(q)>=0,v=q?m:!r.classList.contains("rx");if(v&&++n>4)v=false;r.style.display=v?"":"none"});$("sbp").querySelector("h6").textContent=q?"Результати":"Нещодавні"}
+// що вписує авто-курсор: [початок запиту, дописати 1–2 літери, на який результат спершу навестись] — ціль з'являється серед кількох, повністю не дописуємо
+var QA={lead:["An","n","#rAnd"],mail:["Ко","ме","#sbp .row[data-s=demo]:not(.rx)"],demo:["За","д","#rZap"]};
+// мітка: верх блока (чи видно рядок пошуку повністю)
+D.insertAdjacentHTML("beforeend",'<div id="sbS" style="position:absolute;left:0;right:0;top:0;height:64px;pointer-events:none"></div>');
+var topSeen=true,boxSeen=true;
+function oSet(x,y){ox=x;oy=y;var s=$("sbw");O.style.transform="translate("+(x-s.offsetLeft)+"px,"+(y-s.offsetTop)+"px)";
+  var q=D.getBoundingClientRect(),e=document.elementFromPoint(q.left+x+1,q.top+y+1);
+  $("sb").classList.toggle("hv",!!(e&&e.closest("#sb")));[].forEach.call(document.querySelectorAll("#sbp .row"),function(r){r.classList.toggle("hv",!!(e&&e.closest(".row")===r))})}
+function oSeg(x1,y1,d){var x0=ox,y0=oy,el=0,last=performance.now(),bend=rnd(-.08,.08);
+  return new Promise(function(r){(function f(t){if(!paused)el+=t-last;last=t;var k=Math.min(1,el/d),e=1-Math.pow(1-k,3.2),s=Math.sin(Math.PI*e);
+    oSet(x0+(x1-x0)*e-(y1-y0)*bend*s,y0+(y1-y0)*e+(x1-x0)*bend*s);k<1?requestAnimationFrame(f):r()})(last)})}
+function oAt(el,fx,fy){var b=el.getBoundingClientRect(),q=D.getBoundingClientRect();return [b.left-q.left+b.width*fx,b.top-q.top+b.height*fy]}
+async function oClick(){O.classList.add("dn");await sleep(100);O.classList.remove("dn");await sleep(70)}
+// авто-вибір не поспішає: курсор клацає пошук, вписує частину запиту, наводиться на варіант і чекає — є час клацнути самому;
+// далі дописує, наводиться на потрібний і обирає. Клік відвідувача будь-коли перемагає
+async function autoPick(ap,pick){var k=AUTO[an++%AUTO.length],rows=document.querySelectorAll("#sbp .row:not(.rx)"),key=rows[k].dataset.s,a=QA[key];
+  async function type(from,add){for(var i=1;i<=add.length;i++){if(!ap.on)return false;var q=from+add.slice(0,i);sbText(q);filt(q);await sleep(rnd(140,220))}return ap.on}
+  var p=oAt($("sb"),.62,1);oSet(p[0]+rnd(120,180),p[1]+rnd(90,130));O.classList.add("vis");
+  p=oAt($("sb"),rnd(.3,.45),rnd(.4,.6));await oSeg(p[0],p[1],750);await sleep(200);if(!ap.on)return pick;await oClick();
+  $("sb").classList.add("op");on("sbp",true);await sleep(600);
+  if(!await type("",a[0]))return pick;await sleep(450);
+  p=oAt(document.querySelector(a[2]),rnd(.25,.45),rnd(.35,.65));await oSeg(p[0],p[1],650);
+  await sleep(2000);if(!ap.on)return pick;
+  if(!await type(a[0],a[1]))return pick;await sleep(400);
+  p=oAt(rows[k],rnd(.2,.35),rnd(.35,.65));await oSeg(p[0],p[1],600);await sleep(700);if(!ap.on)return pick;await oClick();
+  O.classList.remove("vis");$("sb").classList.remove("hv");rows[k].classList.remove("hv");
+  return key}
+async function scene(){
+  $("sb").classList.remove("op");on("sbp",false);
+  var wait=FIRST?1200:3000,pick=new Promise(function(res){chose=res});FIRST=false;
+  var s=await Promise.race([pick,sleep(wait).then(function(){return null})]);
+  // прогорнув нижче пошуку — вікно саме не відкриваємо, доки рядок знову не видно повністю
+  while(s===null&&!topSeen)s=await Promise.race([pick,sleep(2000).then(function(){return null})]);
+  var auto=false;
+  if(s===null){if(!$("sbp").classList.contains("on")){var ap={on:true};window.AP=ap;auto=true;
+      s=await Promise.race([pick.then(function(v){auto=false;return v}),autoPick(ap,pick)]);
+      // відвідувач клацнув сам посеред авто-вибору — прибираємо авто-курсор
+      if(!auto){ap.on=false;O.classList.remove("vis");[].forEach.call(document.querySelectorAll("#sbp .row"),function(r){r.classList.remove("hv")})}}
+    else s=await pick}
+  window.AP=null;chose=null;sbText(null);filt("");
+  on("sbp",false);$("sb").classList.remove("op","hv");
+  var c=SC[s]||SC.lead;reset();$("t1").querySelector("span").textContent=c[1];page(c[0]);tabs([1,1,0]);act(1);
+  $("tsr").style.visibility="hidden";C.classList.remove("vis");setC(760,420);
+  // вибрав сам відвідувач — головна плавно докручує сторінку, щоб вікно було видно повністю (над смугою з кнопками); авто-вибір сторінку не скролить
+  // докрутка — після того, як пошук уже «сів» у шапку, щоб рух пошуку і прокрутка не накладались (інакше йде хвилею)
+  var back=null;if(!auto){back=1;setTimeout(function(){parent.postMessage({hwReveal:D.offsetTop+Math.round(H*K)+56},"*")},1100)}
+  morphing=true;BOX.style.transition="height 1s cubic-bezier(.4,0,.2,1),opacity .6s ease";openBox(true);sbToBar(true);await sleep(1050);BOX.style.transition="";
+  $("sbw").classList.add("hide");$("tsr").style.visibility="";morphing=false;
+  await sleep(150);C.classList.add("vis");
+  await c[2]();played++;
+  // відвідувач прогорнув далі під час показу (видно менше половини вікна) — вікно не згортаємо, сценарії йдуть по колу, доки не повернеться до нього
+  while(!boxSeen){back=null;await sleep(1200);if(boxSeen)break;
+    c=SC[["lead","mail","demo"][AUTO[an++%AUTO.length]]];reset();$("t1").querySelector("span").textContent=c[1];page(c[0]);tabs([1,1,0]);act(1);on("tsr",true);
+    setC(760,420);await sleep(400);await c[2]();played++}
+  var fo=seg(cx+rnd(120,180),cy+rnd(60,100),700,.06);await sleep(150);C.classList.remove("vis");await fo;
+  // назад: гасне екран, потім і рамка вікна — лишається лише маленький пошук; далі він швидко (0,6 с) виростає в рядок, а невидиме вікно згортається
+  morphing=true;sbToBar(false);$("sbw").classList.remove("hide");$("tsr").style.visibility="hidden";
+  F.style.transition="opacity .45s ease";F.style.opacity=0;await sleep(350);
+  BOX.style.transition="opacity .4s ease";BOX.style.opacity=0;await sleep(450);
+  // якщо ми докручували сторінку — спершу плавно повертаємо її (окремо від руху пошуку)
+  if(back!=null){parent.postMessage({hwBack:1},"*");await sleep(1050)}
+  $("sbw").classList.add("slow");BOX.style.transition="height .6s cubic-bezier(.4,0,.2,1)";
+  await sleep(30);openBox(false);sbHome(true);await sleep(650);
+  page("pHome");tabs([1,0,0]);act(0);F.style.transition="";F.style.opacity=1;
+  morphing=false;on("tsr",false);$("tsr").style.visibility="";$("sbw").classList.remove("slow");BOX.style.transition="";
+  await sleep(200);
+}
+async function loop(){openBox(false);sbHome(false);for(;;){await scene()}}
+reset();setC(1180,650);
+if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){C.style.display="none"}
+if("IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){paused=!e.isIntersecting})}).observe($("demo"));
+  new IntersectionObserver(function(es){es.forEach(function(e){topSeen=e.intersectionRatio>.98})},{threshold:[0,.5,.98,1]}).observe($("sbS"));
+  new IntersectionObserver(function(es){es.forEach(function(e){boxSeen=e.intersectionRatio>=.5})},{threshold:[0,.25,.5,.75,.9,.95,1]}).observe(BOX)}
+// висота сторінки — головній, щоб рамка вбудовування росла разом з вікном (низ body, бо верхній відступ блока «випадає» з його висоти)
+if(window.ResizeObserver)new ResizeObserver(function(){parent.postMessage({hwH:Math.ceil(document.body.getBoundingClientRect().bottom)},"*")}).observe(document.body);
+loop();
+})();
+</script>
+</template><script>
+(function(){
+  var f=document.getElementById("hwDemo"),base=null,ani=0;
+  f.srcdoc='<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+document.getElementById("hwT1").innerHTML+document.getElementById("hwT2").innerHTML+document.getElementById("hwT3").innerHTML+'</html>';
+  function glide(dy,ms){var y0=scrollY,t0=performance.now();cancelAnimationFrame(ani);(function g(t){var k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;scrollTo(0,y0+dy*e);if(k<1)ani=requestAnimationFrame(g)})(t0)}
+  // вбудований прототип повідомляє висоту й просить докрутити сторінку (і повернути назад)
+  addEventListener("message",function(e){var d=e.data;if(!d||e.source!==f.contentWindow)return;
+    if(d.hwH)f.style.height=d.hwH+"px";
+    if(d.hwReveal!=null){var bar=document.getElementById("hwBar"),need=f.getBoundingClientRect().top+d.hwReveal+(bar?bar.offsetHeight:0)-innerHeight;base=scrollY;if(need>0)glide(need,1100)}
+    if(d.hwBack){if(base!=null&&scrollY>base)glide(base-scrollY,1000);base=null}});
+})();
+</script></div>
+  <div id="hwBar"><div class="hw-in"><span class="hw-tx">Відкриваємо доступ першим командам — покажемо Aita безкоштовно</span><a class="btn" href="access.html">Запит на доступ</a><a class="btn ghost" href="demo.html">Безкоштовне демо</a></div></div><div id="hwBarS" style="height:1px;margin-top:-1px"></div><style>#hwBar{z-index:4}#hwBar .btn{border-radius:12px}.btn{font-weight:500}</style><script>
+// кнопки — липкою смугою, як логотипи клієнтів у Notion: поки їхнє місце нижче екрана (вікно розгорнуте), смуга тримається внизу екрана, а далі стає на своє місце; підпис — лише коли смуга на місці
+(function(){var bar=document.getElementById("hwBar");if("IntersectionObserver" in window)new IntersectionObserver(function(es){es.forEach(function(e){bar.classList.toggle("stuck",!e.isIntersecting&&e.boundingClientRect.top>0)})}).observe(document.getElementById("hwBarS"))})();
+</script>
+</div>
+<section><style>
+/* блок 2: без обводок — підкладки; поточний крок зелений; «Читати більше» під кожним заголовком */
+.feat .fh .more2{display:inline-block;margin-top:20px;font-size:16px;color:#8a8a8a;cursor:pointer}
+.feat .fh .more2:hover{color:#111}
+.feat .vis{border:0;background:#f7f7f7;border-radius:24px}
+.feat .vis .rec{border:0;background:#fff}
+.feat .vis .st{border:0;box-shadow:none;background:#f4f4f4}
+.feat .vis .st.c{background:rgba(0,184,0,.12)}
+.feat .vis .st.c .n{background:#00b800;color:#fff}
+.feat .vis .a,.feat .vis .src span{border:0}
+.feat .vis .a{background:#fff}
+.clg{width:100%;max-width:520px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.clg .k{background:#fff;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.35;display:flex;flex-direction:column}
+.clg .k small{display:block;color:var(--mute);font-size:12px;margin-bottom:4px}
+.clg .who{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:12px;font-size:13px;line-height:24px;color:#555}
+.clg .ava{display:block;width:24px;height:24px;margin:0;border-radius:50%;flex:none;background:#eee center/cover}
+.clg .who em{font-style:normal;font-size:12px;line-height:20px;padding:0 9px;border-radius:999px;background:#f2f2f2;color:#555;margin-left:auto}
+.clg .who em.ok{background:rgba(0,184,0,.12);color:#0a7d0a}
+.clg .ring{position:relative;width:64px;height:64px;margin:6px 0 8px}
+.clg .k.goalk{background:#fff}
+.clg .stack{display:grid;grid-template-rows:1fr 1fr;gap:10px}
+.clg .stack .k{padding:12px 14px}
+.clg .stack .who{padding-top:8px}
+.clg .tchips{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.clg .tchip{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;border-radius:999px;background:rgba(0,184,0,.12);color:#0a5d0a;font-size:13px;line-height:20px}
+.clg .tchip .ava{width:22px;height:22px}
+.clg .tchip b{margin-left:auto;font-weight:600}
+.chipsrc{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:12px;line-height:20px;padding:2px 10px;border-radius:999px;background:#f2f2f2;color:#555}
+.chipsrc svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.clg .ring svg{width:64px;height:64px;transform:rotate(-90deg)}
+.clg .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;font-weight:600}
+/* блок 2 — текст по лівому краю, як в інших блоках */
+/* підзаголовок під заголовком блоку */
+.feat .fh .fsub{margin:16px 0 0;max-width:520px;font-size:18px;line-height:26px;color:var(--mute);text-wrap:balance}
+/* правило для всіх мов: у підписах і описах без рядків з 1–2 слів — рядки вирівнюються за довжиною */
+.sub,.fsub,.wc p,.cap p,.video span{text-wrap:balance}
+/* візуали трьох блоків: 1 — події самі збираються в картці ліда; 2 — відповідь із цитатою з дзвінка; 3 — ланцюжок робота → ціль */
+.feat .vis .st.g1 .n{background:rgba(0,184,0,.12);color:#0a7d0a}
+.feat .vis .st.g1 .n svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat .vis .st.g1 .g1s{color:var(--mute);font-size:13px}
+.js #gather .st{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.js #gather.in .st{opacity:1;transform:none}
+#gather .st:nth-child(2){transition-delay:.35s}#gather .st:nth-child(3){transition-delay:.7s}#gather .st:nth-child(4){transition-delay:1.05s}#gather .st:nth-child(5){transition-delay:1.4s}
+@media(prefers-reduced-motion:reduce){.js #gather .st{opacity:1;transform:none;transition:none}}
+.qa .tq{margin-top:14px;padding-top:12px;border-top:1px solid #f0f0f0}
+.qa .tq p{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:#555;font-style:italic}
+.g3{width:100%;max-width:540px;display:grid;grid-template-columns:1.2fr .8fr;gap:10px;align-items:stretch}
+.g3 .chain{display:flex;flex-direction:column;gap:8px;position:relative}
+.g3 .chain:before{content:"";position:absolute;left:5px;top:18px;bottom:18px;border-left:1.5px solid #e0e0e0}
+.g3 .c3{display:flex;gap:12px;align-items:center;position:relative}
+.g3 .c3>i{width:11px;height:11px;border-radius:50%;background:#00b800;flex:none;box-shadow:0 0 0 3px #f7f7f7}
+.g3 .c3.wait>i{background:#fff;border:1.5px solid #ffbb00}
+.g3 .k{flex:1;background:#fff;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.35}
+.g3 .k small{display:block;color:var(--mute);font-size:12px;margin-bottom:3px}
+.g3 .who{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12.5px;color:#555}
+.g3 .ava{display:block;width:20px;height:20px;border-radius:50%;flex:none;background:#eee center/cover}
+.g3 .who em{font-style:normal;font-size:12px;line-height:20px;padding:0 9px;border-radius:999px;background:#f2f2f2;color:#555;margin-left:auto}
+.g3 .who em.ok{background:rgba(0,184,0,.12);color:#0a7d0a}
+.g3 .c3.wait .who em{background:rgba(255,187,0,.18);color:#8a6100}
+.g3 .goal3{display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px}
+.g3 .ring{position:relative;width:72px;height:72px;margin:8px 0 10px}
+.g3 .ring svg{width:72px;height:72px;transform:rotate(-90deg)}
+.g3 .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:16px;font-weight:600}
+.g3 .plus1{margin-top:auto;padding-top:12px;font-size:12px;color:#8a6100}
+@media(max-width:760px){.g3{grid-template-columns:1fr}}
+/* блок 1: спрощена картка ліда — шапка (стадія, сума, температура), активність збирається сама, властивості праворуч */
+.feat .vis .ld{width:100%;max-width:600px;background:#fff;border-radius:14px;overflow:hidden;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.ld svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ld-h{display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-bottom:1px solid #f0f0f0}
+.ld-pill{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 9px;border-radius:7px;border:1px solid #93c5fd;background:rgba(47,111,237,.08);color:#1d4ed8;font-weight:600;font-size:12.5px}
+.ld-pill i{width:7px;height:7px;border-radius:50%;background:#2f6fed}
+.ld-money{height:24px;padding:0 8px;display:inline-flex;align-items:center;border-radius:7px;background:rgba(0,184,0,.12);color:#11883a;font-size:12.5px;font-weight:600}
+.ld-temp{height:24px;padding:0 8px;display:inline-flex;align-items:center;border-radius:7px;border:1.5px solid #ffa31a;color:#d97706;font-size:10.5px;font-weight:700;letter-spacing:.06em}
+.ld-x{margin-left:auto;color:#9a9a9a;font-size:14px}
+.ld-b{display:grid;grid-template-columns:1fr 178px}
+.ld-l{padding:16px 18px 14px;border-right:1px solid #f0f0f0;min-width:0}
+.ld-n{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.ld-e{color:#777;font-size:12.5px;margin-top:2px}
+.ld-tabs{display:flex;gap:16px;margin:14px 0 6px;border-bottom:1px solid #f0f0f0;font-size:12.5px;color:#8a8a8a}
+.ld-tabs span{padding-bottom:8px}.ld-tabs .on{color:#111;font-weight:600;box-shadow:inset 0 -2px 0 #111}
+.ld-feed .fi{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:7px 0}
+.ld-feed .fic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(0,184,0,.12);color:#0a7d0a}
+.ld-feed .fi b{display:block;font-weight:600;font-size:13px}
+.ld-feed .fi div>span{display:block;color:#777;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ld-feed .fi small{color:#9a9a9a;font-size:11.5px;white-space:nowrap}
+.ld-feed .fi>div{min-width:0}
+.ld-pill,.ld-money,.ld-temp{white-space:nowrap;flex:none}
+.js #gather>.fi{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+.js #gather.in>.fi{opacity:1;transform:none}
+#gather>.fi:nth-child(2){transition-delay:.35s}#gather>.fi:nth-child(3){transition-delay:.7s}#gather>.fi:nth-child(4){transition-delay:1.05s}#gather>.fi:nth-child(5){transition-delay:1.4s}
+@media(prefers-reduced-motion:reduce){.js #gather>.fi{opacity:1;transform:none;transition:none}}
+.ld-r{padding:16px 14px;background:#fcfcfc}
+.ld-r h6{margin:0 0 12px;font-size:12.5px;font-weight:600}
+.ld-r dl{margin:0;display:grid;gap:4px}
+.ld-r dt{color:#8a8a8a;font-size:11.5px;margin-top:6px}
+.ld-r dd{margin:0;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#111}
+.ld-r dd svg{color:#8a8a8a}
+.ld-r .ava{display:block;width:18px;height:18px;border-radius:50%;background:#eee center/cover}
+@media(max-width:760px){.ld-b{grid-template-columns:1fr}.ld-r{display:none}.ld-l{border-right:0}.ld-x{display:none}}
+/* блок 2: пошук → відповідь із полями → рядок транскрипту, звідки вона взялась (підсвічено) */
+.mem{width:100%;max-width:480px;display:flex;flex-direction:column;gap:10px}
+.mem .m-q{display:flex;align-items:center;gap:10px;height:48px;padding:0 18px;border-radius:9999px;background:#fff;border:1px solid #e3e3e3;font-size:15px;color:#111}
+.mem .m-q svg{width:17px;height:17px;flex:none;fill:none;stroke:#8a8a8a;stroke-width:1.8;stroke-linecap:round}
+.mem .m-a{background:#fff;border-radius:14px;padding:10px 16px;font-size:14px;line-height:20px}
+.mem small{display:block;color:var(--mute);font-size:12px;margin-bottom:8px}
+.mem .m-rows{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.mem .m-rows span{color:var(--mute)}
+.mem .m-src{margin-top:12px;font-size:12.5px;color:#8a6100}
+.mem .m-t{background:#fff;border-radius:14px;padding:12px 16px 10px;font-size:13.5px;line-height:1.45}
+.mem .m-th{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px;margin-bottom:8px}
+.mem .m-th svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mem .m-th small{display:inline;margin:0 0 0 auto;font-weight:400}
+.mem .m-l{display:grid;grid-template-columns:40px 48px 1fr;padding:5px 0;color:#555}
+.mem .m-l i{font-style:normal;font-size:12px;color:#9a9a9a;padding-top:1px}
+.mem .m-l b{font-weight:600;color:#111}
+.mem .m-l mark{background:rgba(255,187,0,.28);color:#111;border-radius:4px;padding:1px 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media(max-width:760px){.mem .m-l{grid-template-columns:36px 1fr}.mem .m-l b{grid-column:2}.mem .m-l>:last-child{grid-column:2}.mem .m-th small{display:none}}
+.qa{width:100%;max-width:460px;display:flex;flex-direction:column;gap:10px}
+.qa .q2{align-self:flex-end;background:rgba(0,96,255,.12);color:#0b3fa8;border-radius:14px 14px 4px 14px;padding:10px 14px;font-size:14px}
+.qa .a2{background:#fff;border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:14px}
+.qa .a2 .hd{display:flex;align-items:center;gap:8px;font-weight:600;margin-bottom:10px}
+.qa .a2 .hd .mk2{width:24px;height:24px;border-radius:7px;background:#111;display:grid;place-items:center}
+.qa .a2 .hd .mk2 svg{width:13px;height:12px}
+.qa .rows{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px}
+.qa .rows span{color:var(--mute)}
+.qa .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+@media(max-width:760px){.clg{grid-template-columns:1fr}.feat.rev .fh{text-align:left}.feat .fh .fsub{font-size:16px;line-height:24px}.feat.rev .fh .fsub{margin-left:0}}
+</style><div class="w">
+  <div class="feat">
+    <div class="fh"><h3>Історія клієнта збирається,<br>поки команда працює</h3><p class="fsub">Aita записує дзвінки, прив'язує листи до ліда й тримає задачі та файли поруч.</p><a class="more2">Читати більше →</a></div>
+    <div class="vis"><div class="ld">
+      <div class="ld-h"><span class="ld-pill"><i></i>Пропозиція<svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="ld-money">€12 400</span><span class="ld-temp">ТЕПЛИЙ</span><span class="ld-x">···&nbsp;&nbsp;×</span></div>
+      <div class="ld-b"><div class="ld-l"><div class="ld-n">Вектор</div><div class="ld-e">Ірина Коваль · irina@vector.example</div>
+        <div class="ld-tabs"><span class="on">Активність</span><span>Задачі 2</span><span>Файли 1</span></div>
+        <div class="ld-feed" id="gather"><div class="fi"><span class="fic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><div><b>Дзвінок записано</b><span>Транскрипт і конспект готові</span></div><small>17 вер.</small></div><div class="fi"><span class="fic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><div><b>Лист прив'язано</b><span>Re: умови оплати</span></div><small>18 вер.</small></div><div class="fi"><span class="fic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>Задача виконана</b><span>Рахунок «Вектору» · Олег</span></div><small>18 вер.</small></div><div class="fi"><span class="fic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><div><b>Файл додано</b><span>Рахунок «Вектору».pdf</span></div><small>18 вер.</small></div><div class="fi"><span class="fic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Чат ліда</b><span>Максим: умову знижки додав у рахунок</span></div><small>зараз</small></div></div></div>
+        <div class="ld-r"><h6>Властивості</h6><dl><dt>Воронка</dt><dd><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg>B2B продажі</dd><dt>Менеджер</dt><dd><span class="ava" style="background-image:url(https://api.dicebear.com/7.x/avataaars/svg?seed=Marc%20Klein)"></span>Олег</dd><dt>Джерело</dt><dd>Website</dd><dt>Останній контакт</dt><dd>18 вер.</dd><dt>Наступний крок</dt><dd>Оплата до 30 вер.</dd></dl></div></div>
+    </div></div>
+  </div>
+  <div class="feat rev">
+    <div class="fh"><h3>Пам'ять тримає<br>домовленості</h3><p class="fsub">Aita знаходить домовленості в дзвінках, листах чи документах та відповідає з посиланням на джерело.</p><a class="more2">Читати більше →</a></div>
+    <div class="vis"><div class="mem">
+      <div class="m-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Що ми обіцяли «Вектору»?</div>
+      <div class="m-a"><b>Aita:</b> знижка 10% за оплату до кінця вересня</div>
+      <div class="m-t"><div class="m-th"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Дзвінок з «Вектором»<small>17 вересня · 18 хв · транскрипт</small></div>
+        <div class="m-l"><i>12:39</i><b>Ірина</b><span>Якщо оплатимо раніше, ціна буде краща?</span></div>
+        <div class="m-l hl"><i>12:41</i><b>Олег</b><mark>Так, даємо десять відсотків, якщо оплатять до кінця місяця.</mark></div>
+        <div class="m-l"><i>12:42</i><b>Ірина</b><span>Домовились, чекаємо рахунок.</span></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="feat">
+    <div class="fh"><h3>Ціль оновлюється<br>з реальної роботи</h3><p class="fsub">Задачі команди прив'язані до цілей, тож прогрес видно з виконаної роботи.</p><a class="more2">Читати більше →</a></div>
+    <div class="vis"><div class="g3">
+      <div class="chain"><div class="c3"><i></i><div class="k"><small>Домовленість · дзвінок 17 вересня</small>Знижка 10% за оплату до кінця вересня</div></div><div class="c3"><i></i><div class="k"><small>Задача</small>Рахунок «Вектору»<div class=who><span class="ava" style="background-image:url(https://api.dicebear.com/7.x/avataaars/svg?seed=Marc%20Klein)"></span>Олег<em class="ok">виконано</em></div></div></div><div class="c3"><i></i><div class="k"><small>Задача</small>Умова знижки в рахунку<div class=who><span class="ava" style="background-image:url(https://api.dicebear.com/7.x/avataaars/svg?seed=Liam%20Carter)"></span>Максим<em class="ok">виконано</em></div></div></div><div class="c3 wait"><i></i><div class="k"><small>Оплата</small>Передоплата «Вектора»<div class="who">очікується<em>до кінця вересня</em></div></div></div></div>
+      <div class="k goal3"><small>Ціль кварталу</small><div class="ring"><svg viewBox="0 0 36 36"><!-- 5 сегментів: 3 готово, 1 чекає оплати «Вектора», 1 попереду --><circle cx="18" cy="18" r="15.5" fill="none" stroke="#ececec" stroke-width="4" stroke-dasharray="17.48 2" stroke-dashoffset="-1"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#ffbb00" stroke-width="4" stroke-dasharray="17.48 2 17.48 2 17.48 100" stroke-dashoffset="-1"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,187,0,.4)" stroke-width="4" stroke-dasharray="0 58.44 17.48 100" stroke-dashoffset="-1"/></svg><b>3/5</b></div>Нові клієнти з передоплатою<span class="plus1">+1 після оплати «Вектора»</span></div>
+    </div></div>
+  </div>
+</div><script>
+// блок 1: події «збираються» в картці ліда, коли блок з'являється на екрані (без JS і з reduced-motion — видно одразу)
+(function(){var g=document.getElementById("gather");if(!g||!("IntersectionObserver" in window))return;document.documentElement.classList.add("js");new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){g.classList.add("in");o.disconnect()}})},{threshold:.4}).observe(g)})();
+</script></section>
+<section style="padding-top:64px"><div class="w">
+  <h2>Можливості Aita</h2>
+  <div class="caps">
+    <div class="cap"><div class="img"></div><h4>Клієнти</h4><p>Листування, клієнти й угоди зберігаються в одному контексті.</p><span class="more">Детальніше →</span></div>
+    <div class="cap"><div class="img"></div><h4>Робота</h4><p>Проєкти й задачі рухаються за вашими етапами.</p><span class="more">Детальніше →</span></div>
+    <div class="cap"><div class="img"></div><h4>Пам'ять компанії</h4><p>Асистент знаходить відповіді в документах і зустрічах із джерелами.</p><span class="more">Детальніше →</span></div>
+    <div class="cap"><div class="img"></div><h4>Агенти</h4><p>Агенти виконують повторювану роботу, а людина підтверджує дії.</p><span class="more">Детальніше →</span></div>
+  </div>
+</div></section>
+<section class="ctx"><style>
+/* меню: посилання трохи темніші; фінальна кнопка — нормальні відступи (поле .w з !important їх обнуляло) */
+nav .links span{color:#4d4d4d}
+.w.cta{padding-top:96px!important;padding-bottom:128px!important}
+/* блок 4: «Кожна [слово]» окремим рядком, чип плавно міняє ширину й колір (4 бренд-кольори) */
+.ctx h2 .ln{display:block}
+#chip{transition:width .45s cubic-bezier(.4,0,.2,1),background-color .45s,color .45s;border-color:transparent}
+#chip span{position:relative;top:-.1em}
+</style><div class="w">
+  <h2><span class="ln">Кожна <span class="chip" id="chip"><span>задача</span></span></span><span class="ln">має контекст клієнта</span><span class="ln">й&nbsp;проєкту</span></h2>
+  <div class="video"><span>Відео: агенти працюють на платформі — видно, як клієнт, угода, проєкт, задачі й рішення пов'язані між собою</span></div>
+</div></section>
+<div class="w cta"><style>
+/* фінальний блок: дві кнопки, як у першому екрані */
+.w.cta{padding-top:192px!important}
+/* відступ під кнопками +30% (128 → 168) */
+.w.cta{padding-bottom:168px!important}
+.w.cta h2{margin:0 auto 32px;max-width:900px;text-align:center}
+.w.cta .cta-b{display:flex;gap:16px;justify-content:center}
+.w.cta .btn{height:52px;padding:0 28px;font-size:16px;border-radius:12px}
+@media(max-width:760px){.w.cta{padding-top:96px!important}.w.cta .cta-b{flex-direction:column}}
+</style><h2>Почніть роботу з Aita</h2><div class="cta-b"><a class="btn" href="access.html">Запит на доступ</a><a class="btn ghost" href="demo.html">Безкоштовне демо</a></div></div>
+<footer><div class="w"><b><a href="./">Aita</a></b><span>Можливості</span><span><a href="pricing.html">Ціни</a></span><span>Про нас</span><span>Партнерам</span><span>Інвестори</span><span>Контакти</span><span>Юридичне</span></div></footer>
+<script>
+(function(){
+  var root=document.documentElement,t=document.getElementById("theme");
+  t.onclick=function(){var d=root.getAttribute("data-theme")==="dark";root.setAttribute("data-theme",d?"light":"dark");t.textContent=d?"☾":"☀";};
+  // чип у блоці 4: слово змінюється одразу, ширина чипа плавно підлаштовується під слово, фон — по черзі 4 бренд-кольори
+  var words=["задача","угода","гіпотеза","зустріч","домовленість"],cols=[["rgba(0,96,255,.12)","#0050d6"],["rgba(0,184,0,.14)","#0a7d0a"],["rgba(255,187,0,.22)","#9a6b00"],["rgba(255,0,0,.11)","#d00000"]],chip=document.getElementById("chip"),lab=chip.firstChild,i=0,ws=[];
+  function fit(){var m=document.createElement("span");m.style.cssText="position:absolute;visibility:hidden;white-space:nowrap";chip.appendChild(m);ws=words.map(function(x){m.textContent=x;return Math.ceil(m.getBoundingClientRect().width)});chip.removeChild(m);chip.style.width="calc("+ws[i]+"px + .8em)"}
+  function paint(){chip.style.backgroundColor=cols[i%4][0];chip.style.color=cols[i%4][1]}
+  fit();paint();window.addEventListener("resize",fit);if(document.fonts)document.fonts.ready.then(fit);
+  setInterval(function(){i=(i+1)%words.length;lab.textContent=words[i];chip.style.width="calc("+ws[i]+"px + .8em)";paint()},2200);
+})();
+</script>
+</body></html>
