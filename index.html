@@ -1122,11 +1122,11 @@ nav .links span{color:#4d4d4d}
 .mkt-img .frame{border-radius:12px}
 @media(max-width:760px){.mkt{padding-top:72px}.mkt-img.nb{height:440px;overflow:hidden}}
 </style><div class="w">
-  <h2><span class="ln">Виставляйте <span class="chip" id="chipMk"><span>обладнання</span></span> там само,</span><span class="ln">де ведете проєкт</span></h2>
+  <h2><span class="ln">Виставляйте <span class="chip" id="chipMk"><span>послуги</span></span> там само,</span><span class="ln">де ведете проєкт</span></h2>
   <div class="nb mkt-img"><div class="frame" data-nb="neutral" data-s="1" style="left:0px;top:0px"></div></div>
 </div><script>
 // чип маркетплейсу: слова по черзі, ширина й колір — як у першому блоці
-(function(){var words=["обладнання","послуги"],cols=[["rgba(0,96,255,.12)","#0050d6"],["rgba(0,184,0,.14)","#0a7d0a"]],chip=document.getElementById("chipMk"),lab=chip.firstChild,i=0,ws=[];
+(function(){var words=["послуги"],cols=[["rgba(0,184,0,.14)","#0a7d0a"]],chip=document.getElementById("chipMk"),lab=chip.firstChild,i=0,ws=[];
   function fit(){var m=document.createElement("span");m.style.cssText="position:absolute;visibility:hidden;white-space:nowrap";chip.appendChild(m);ws=words.map(function(x){m.textContent=x;return Math.ceil(m.getBoundingClientRect().width)});chip.removeChild(m);chip.style.width="calc("+ws[i]+"px + .8em)"}
   function paint(){chip.style.backgroundColor=cols[i%2][0];chip.style.color=cols[i%2][1]}
   fit();paint();addEventListener("resize",fit);if(document.fonts)document.fonts.ready.then(fit);
