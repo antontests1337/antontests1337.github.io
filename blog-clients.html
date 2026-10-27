@@ -255,4 +255,12 @@ body>nav>.w{height:60px}
   fit(); place(); window.addEventListener('resize', function(){ fit(); place(); });
 })();
 </script>
+<style id="navfix">
+/* меню: активний пункт — за поточною сторінкою, наведення — на всіх пунктах (Антон 27.10) */
+body>nav .links>span{color:#4d4d4d!important;font-weight:400!important;transition:color .15s}
+body>nav .links>span:hover,body>nav .links>span.on,body>nav .links>span.cur{color:#111!important}
+body>nav .links>span.cur{font-weight:500!important}
+</style><script>
+(function(){var f=(location.pathname.split("/").pop()||"index.html"),m={"modules.html":1,"pricing.html":3,"energy.html":0,"blog.html":2,"blog-clients.html":2,"blog-memory.html":2,"partners.html":2,"become-partner.html":2,"about.html":2},k=m[f],s=document.querySelectorAll("body>nav .links>span");if(k!=null&&s[k])s[k].classList.add("cur")})();
+</script>
 </body></html>
