@@ -162,14 +162,34 @@ body>nav>.w{height:60px}
 <div class="step"><div class="t"><span class="n">4</span>Перші клієнти</div><p>Клієнти платять — ви отримуєте виплату щомісяця.</p><div class="shot"><div class="frame" data-f="lead"></div></div></div>
 </div></div>
 
-<div class="pt-sec"><h2>FAQ</h2><div class="pt-faq">
-<details open><summary>Скільки я можу заробити?</summary><p>До 15% від усього, що платять ваші клієнти: підписка, сапорт, онбординг, діджиталізація, угоди на маркетплейсі. Що більше платять клієнти за квартал, то вищий відсоток.</p></details>
-<details><summary>Чиї це клієнти?</summary><p>Клієнти укладають договір з Aita. Ви отримуєте відсоток, поки діє ваша угода з нами.</p></details>
-<details><summary>Коли і як ви платите?</summary><p>Щомісяця, без очікування кінця кварталу.</p></details>
-<details><summary>Чи даєте ви ексклюзив на регіон?</summary><p>Ні, ексклюзиву не даємо.</p></details>
-<details><summary>Що буде з відсотком, якщо ми припинимо співпрацю?</summary><p>Ще два роки ви отримуєте відсоток з угод ваших клієнтів на маркетплейсі.</p></details>
-<details><summary>Чи можу я сам робити онбординг і сапорт?</summary><p>Так, після навчання. Цю роботу ми оплачуємо окремо.</p></details>
-</div></div>
+<div class="pt-sec"><style id="afaq-css">
+.afaq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:64px;align-items:start}
+.afaq-h{position:sticky;top:96px}
+.afaq-l{display:inline-block;font-size:13px;font-weight:500;padding:4px 10px;border:1px solid #e6e6e6;border-radius:8px;color:#4d4d4d;background:#fff}
+.afaq-h h2{margin:20px 0 0;text-wrap:balance}.afaq-h h2 span{color:#8a8a8a}
+.afaq-h p{margin:20px 0 0;color:#737373;font-size:16px;line-height:1.55;max-width:360px}
+.afaq-list{border-top:1px solid #e6e6e6}
+.afaq-i{border-bottom:1px solid #e6e6e6}
+.afaq-q{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;font-size:20px;line-height:1.35;font-weight:500;color:#111;cursor:pointer}
+.afaq-q:focus-visible{outline:2px solid #111;outline-offset:4px;border-radius:4px}
+.afaq-b{flex:none;width:32px;height:32px;border-radius:50%;background:#f2f2f2;position:relative;transition:background .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.afaq-b:before,.afaq-b:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;margin:-.8px 0 0 -6px;background:#111;border-radius:2px;transition:background .25s}
+.afaq-b:after{transform:rotate(90deg)}
+.afaq-q:hover .afaq-b{background:#e8e8e8}
+.afaq-i.on .afaq-b{background:#111;transform:rotate(135deg)}.afaq-i.on .afaq-b:before,.afaq-i.on .afaq-b:after{background:#fff}
+.afaq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}
+.afaq-a>div{overflow:hidden}
+.afaq-a p{margin:0;padding:0 56px 24px 0;color:#4d4d4d;font-size:16px;line-height:1.6;opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .35s}
+.afaq-i.on .afaq-a{grid-template-rows:1fr}.afaq-i.on .afaq-a p{opacity:1;transform:none;transition-delay:.08s}
+@media(prefers-reduced-motion:reduce){.afaq-a,.afaq-a p,.afaq-b{transition:none}}
+@media(max-width:760px){.afaq{grid-template-columns:1fr;gap:32px}.afaq-h{position:static}.afaq-q{font-size:17px;padding:20px 0}.afaq-a p{padding-right:0}}
+</style><div class="afaq"><div class="afaq-h"><span class="afaq-l">Питання</span><h2>Часті питання, <span>короткі відповіді</span></h2></div><div class="afaq-list"><div class="afaq-i on"><button class="afaq-q" type="button" aria-expanded="true">Скільки я можу заробити?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>До 15% від усього, що платять ваші клієнти: підписка, сапорт, онбординг, діджиталізація, угоди на маркетплейсі. Що більше платять клієнти за квартал, то вищий відсоток.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чиї це клієнти?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Клієнти укладають договір з Aita. Ви отримуєте відсоток, поки діє ваша угода з нами.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Коли і як ви платите?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Щомісяця, без очікування кінця кварталу.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чи даєте ви ексклюзив на регіон?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Ні, ексклюзиву не даємо.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Що буде з відсотком, якщо ми припинимо співпрацю?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Ще два роки ви отримуєте відсоток з угод ваших клієнтів на маркетплейсі.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чи можу я сам робити онбординг і сапорт?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Так, після навчання. Цю роботу ми оплачуємо окремо.</p></div></div></div></div></div><script>
+// «Питання»: один відкритий пункт за раз, плавне розкриття
+document.querySelectorAll(".afaq").forEach(function(f){var it=f.querySelectorAll(".afaq-i");
+  it.forEach(function(i){i.querySelector(".afaq-q").addEventListener("click",function(){var o=!i.classList.contains("on");
+    it.forEach(function(x){x.classList.remove("on");x.querySelector(".afaq-q").setAttribute("aria-expanded","false")});
+    if(o){i.classList.add("on");this.setAttribute("aria-expanded","true")}})})});
+</script></div>
 
 <div class="pt-end"><h2>Обговорімо, як це працюватиме у вас</h2><p>30 хвилин: умови, ваші клієнти, з чого почати.</p><div class="b"><a class="btn" href="become-partner.html">Стати партнером</a><a class="btn ghost" href="access.html">Отримати демодоступ</a></div></div>
 </div>
