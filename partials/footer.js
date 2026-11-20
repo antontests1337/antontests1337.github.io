@@ -25,7 +25,11 @@
   + '@media (max-width:1024px){.af .af-w{padding:0 40px}}'
   + '@media (max-width:760px){.af .af-w{padding:0 20px;gap:4px 20px}.af-lsw{margin:16px 0 0;height:44px}}';
   var LANGS = [['uk','Українська'],['en','English'],['es','Español'],['pl','Polski'],['hu','Magyar'],['de','Deutsch']];
-  var opts = LANGS.map(function (l) { return '<option value="" lang="' + l[0] + '"' + (l[0] === 'uk' ? ' selected' : ' disabled') + '>' + l[1] + (l[0] === 'uk' ? '' : ' — soon') + '</option>'; }).join('');
+  // languages with a page are given as data-uk / data-en; the rest are shown as «soon»
+  var CUR = me.getAttribute('data-lang') || 'uk';
+  var opts = LANGS.map(function (l) { var h = me.getAttribute('data-' + l[0]); var on = h !== null || l[0] === CUR;
+    return '<option value="' + (h || '') + '" lang="' + l[0] + '"' + (l[0] === CUR ? ' selected' : (on ? '' : ' disabled')) + '>' + l[1] + (on ? '' : ' — soon') + '</option>'; }).join('');
+  var CURN = LANGS.filter(function (l) { return l[0] === CUR; })[0][1];
   var HTML = '<footer class="af"><div class="af-w"><b>Aita</b>'
   + off('Our solutions') + '<a href="' + L('modules') + '">Modules</a><a href="' + L('pricing') + '">Pricing</a>'
   + off('Partnership') + '<a href="' + L('blog') + '">Blog</a><a href="' + L('about') + '">About us</a>'
@@ -34,12 +38,12 @@
   + '<a href="' + D('legal/aviso-legal') + '">Legal notice</a><a href="' + D('legal/privacy') + '">Privacy</a><a href="' + D('legal/cookies') + '">Cookies</a>'
   + '<a href="' + D('legal/terms') + '">Terms of use</a><a href="' + D('legal/delete-account') + '">Delete account</a><a href="' + D('legal/ens') + '">ENS</a><a href="' + D('security') + '">Security</a>'
   + '<a href="#" data-cookie-prefs>Cookie settings</a>'
-  + '<label class="af-lsw"><span>Українська</span><i></i><select aria-label="Language">' + opts + '</select></label>'
+  + '<label class="af-lsw"><span>' + CURN + '</span><i></i><select aria-label="Language">' + opts + '</select></label>'
   + '</div></footer>';
   var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
   me.insertAdjacentHTML('afterend', HTML);
   var f = me.nextElementSibling;
-  f.querySelector('select').addEventListener('change', function () { var v = this.value; try { localStorage.setItem('aitaLang', this.selectedOptions[0].lang); } catch (e) {} if (v) location.href = v; });
+  f.querySelector('select').addEventListener('change', function () { var v = this.value; try { localStorage.setItem('aitaLang', this.selectedOptions[0].lang); } catch (e) {} if (v && this.selectedOptions[0].lang !== CUR) location.href = v; });
   var cp = f.querySelector('[data-cookie-prefs]');
   cp.addEventListener('click', function (e) { e.preventDefault(); if (window.AitaConsent && AitaConsent.openPreferences) AitaConsent.openPreferences(); });
   if (!window.AitaConsent) setTimeout(function () { if (!window.AitaConsent) cp.remove(); }, 1500);

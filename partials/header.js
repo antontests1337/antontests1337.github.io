@@ -11,6 +11,9 @@
   var X = me.getAttribute('data-ext') || '';   // ".html" for local copies without clean URLs
   // logo → the new landing at the site root (one level above uk/)
   var HOME = me.getAttribute('data-home') || (B + '../' + (X ? 'index' + X : ''));
+  var EN = me.getAttribute('data-lang') === 'en';
+  var T = EN ? {sol:'Our solutions',st:'Startups',oth:'Other industries',soon:'soon',mod:'Modules',res:'Resources',part:'Partnership',dev:'in development',blog:'Blog',guides:'Guides',news:'What’s new',about:'About us',price:'Pricing',cta:'Get started free',menu:'Menu',main:'Main menu',home:'Aita — home',plat:'Platform'}
+             : {sol:'Наші рішення',st:'Стартапи',oth:'Інші галузі',soon:'згодом',mod:'Модулі',res:'Ресурси',part:'Партнерство',dev:'в розробці',blog:'Блог',guides:'Гайди',news:'Що нового',about:'Про нас',price:'Ціни',cta:'Почати безкоштовно',menu:'Меню',main:''+T.main+'',home:''+T.home+'',plat:'Платформа'};
   var L = function (p) { return B + (p ? p + X : (X ? 'index' + X : '')); };
   var MARK = '<svg viewBox="0.024 0.017 91.449 82.571" aria-hidden="true"><path fill="currentColor" d="M34.896,8.778C35.933,3.677 40.434,0.017 45.639,0.017C50.844,0.016 55.345,3.676 56.371,8.779C60.448,28.946 70.592,47.364 85.450,61.528C89.522,63.609 91.881,67.981 91.415,72.530C90.950,77.079 87.754,80.883 83.353,82.126C78.953,83.369 74.239,81.799 71.462,78.166C62.659,70.929 52.739,65.292 41.976,61.426C40.196,60.763 38.875,59.235 38.567,57.362C38.258,55.488 39.004,53.597 40.507,52.437C42.011,51.278 44.028,51.042 45.763,51.812C52.007,54.566 58.458,56.680 65.062,58.140C60.642,46.435 54.059,35.645 45.639,26.345C33.568,39.678 25.282,56.076 21.716,73.833C20.751,78.493 16.885,82.006 12.154,82.523C7.424,83.040 2.901,80.441 0.967,76.093C-0.967,71.745 0.142,66.657 3.682,63.478C19.731,49.106 30.642,29.896 34.896,8.778Z"/></svg>';
   var CSS = ''
@@ -50,23 +53,23 @@
   // start in the right state (no white flash over the hero on reload) and without transitions until the first frame
   var startOver = hero && (window.scrollY || 0) < (window.innerHeight || 800) / 2;
   var HTML = '<header class="ah ah-init' + (startOver ? ' ah-over' : '') + '" role="banner"><div class="ah-w">'
-  + '<a class="ah-logo" href="' + (hero ? '#top' : HOME) + '" aria-label="Aita — на головну">' + MARK + '</a>'
-  + '<nav class="ah-links" aria-label="Головне меню">'
-  +   '<span class="ah-dd" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">Наші рішення<span class="ah-pop">'
-  +     '<a href="' + L('') + '">Стартапи</a><a class="off">Інші галузі<span class="ah-tg">згодом</span></a></span></span>'
-  +   '<a href="' + L('modules') + '">Модулі</a>'
-  +   '<span class="ah-dd" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">Ресурси<span class="ah-pop two">'
-  +     '<a class="off">Партнерство<span class="ah-tg">в розробці</span></a><a href="' + L('blog') + '">Блог</a>'
-  +     '<a class="off">Гайди<span class="ah-tg">в розробці</span></a><a class="off">Що нового<span class="ah-tg">в розробці</span></a>'
-  +     '<a href="' + L('about') + '">Про нас</a></span></span>'
-  +   '<a href="' + L('pricing') + '">Ціни</a>'
+  + '<a class="ah-logo" href="' + (hero ? '#top' : HOME) + '" aria-label="'+T.home+'">' + MARK + '</a>'
+  + '<nav class="ah-links" aria-label="'+T.main+'">'
+  +   '<span class="ah-dd" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">'+T.sol+'<span class="ah-pop">'
+  +     '<a href="' + L('') + '">'+T.st+'</a><a class="off">'+T.oth+'<span class="ah-tg">'+T.soon+'</span></a></span></span>'
+  +   '<a href="' + L('modules') + '">'+T.mod+'</a>'
+  +   '<span class="ah-dd" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">'+T.res+'<span class="ah-pop two">'
+  +     '<a class="off">'+T.part+'<span class="ah-tg">'+T.dev+'</span></a><a href="' + L('blog') + '">'+T.blog+'</a>'
+  +     '<a class="off">'+T.guides+'<span class="ah-tg">'+T.dev+'</span></a><a class="off">'+T.news+'<span class="ah-tg">'+T.dev+'</span></a>'
+  +     '<a href="' + L('about') + '">'+T.about+'</a></span></span>'
+  +   '<a href="' + L('pricing') + '">'+T.price+'</a>'
   + '</nav>'
-  + '<a class="ah-cta" href="https://app.aita.world/auth/register" data-signup>Почати безкоштовно</a>'
-  + '<button class="ah-bg" type="button" aria-label="Меню" aria-expanded="false"><i></i></button>'
-  + '</div><div class="ah-m" role="dialog" aria-label="Меню">'
-  +   '<b>Наші рішення</b><a href="' + L('') + '">Стартапи</a><a class="off">Інші галузі<span class="ah-tg">згодом</span></a>'
-  +   '<b>Платформа</b><a href="' + L('modules') + '">Модулі</a><a href="' + L('pricing') + '">Ціни</a>'
-  +   '<b>Ресурси</b><a href="' + L('blog') + '">Блог</a><a href="' + L('about') + '">Про нас</a><a class="off">Партнерство<span class="ah-tg">в розробці</span></a>'
+  + '<a class="ah-cta" href="https://app.aita.world/auth/register" data-signup>'+T.cta+'</a>'
+  + '<button class="ah-bg" type="button" aria-label="'+T.menu+'" aria-expanded="false"><i></i></button>'
+  + '</div><div class="ah-m" role="dialog" aria-label="'+T.menu+'">'
+  +   '<b>'+T.sol+'</b><a href="' + L('') + '">'+T.st+'</a><a class="off">'+T.oth+'<span class="ah-tg">'+T.soon+'</span></a>'
+  +   '<b>'+T.plat+'</b><a href="' + L('modules') + '">'+T.mod+'</a><a href="' + L('pricing') + '">'+T.price+'</a>'
+  +   '<b>'+T.res+'</b><a href="' + L('blog') + '">'+T.blog+'</a><a href="' + L('about') + '">'+T.about+'</a><a class="off">'+T.part+'<span class="ah-tg">'+T.dev+'</span></a>'
   + '</div></header>' + (hero ? '' : '<div class="ah-sp" aria-hidden="true"></div>');
   var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
   me.insertAdjacentHTML('afterend', HTML);
