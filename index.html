@@ -495,20 +495,28 @@ html{scroll-behavior:smooth}
 
 
 
-/* FAQ: questions from client calls (Bohdan), answers approved by Marina 20.11.2026 — heading left, list right, hairlines, native details */
-.faq .w{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
-.faq h2{margin:0}
-.faq-l{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:20px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"";flex:none;width:12px;height:12px;margin-top:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg);transition:transform .2s}
-.faq details[open] summary:after{transform:translateY(5px) rotate(-135deg)}
-.faq summary:hover:after{border-color:var(--ink)}
-.faq summary:focus-visible{outline:2px solid #0060ff;outline-offset:2px}
-.faq details p{margin:0;padding:0 48px 24px 0;max-width:720px;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--mute)}
-@media (max-width:1024px){.faq .w{grid-template-columns:1fr;gap:var(--sp-head,32px)}}
-@media (max-width:760px){.faq summary{padding:16px 0}.faq details p{padding-right:0;padding-bottom:20px}}
+
+/* FAQ: same design as the «Питання» block on the pricing page (afaq) — label, two-tone heading, +/× buttons, one item open at a time; type on the page scale */
+.faq .afaq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:64px;align-items:start}
+.faq .afaq-h{position:sticky;top:96px}
+.faq .afaq-l{display:inline-block;font-size:var(--fs-ui);line-height:var(--lh-ui);font-weight:500;padding:4px 10px;border:1px solid var(--line);border-radius:8px;color:#4d4d4d;background:#fff}
+.faq .afaq-h h2{margin:20px 0 0;text-wrap:balance}.faq .afaq-h h2 span{color:#8a8a8a}
+.faq .afaq-list{border-top:1px solid var(--line)}
+.faq .afaq-i{border-bottom:1px solid var(--line)}
+.faq .afaq-q{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink);cursor:pointer}
+.faq .afaq-q:focus-visible{outline:2px solid #111;outline-offset:4px;border-radius:4px}
+.faq .afaq-b{flex:none;width:32px;height:32px;border-radius:50%;background:#f2f2f2;position:relative;transition:background .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.faq .afaq-b:before,.faq .afaq-b:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;margin:-.8px 0 0 -6px;background:#111;border-radius:2px;transition:background .25s}
+.faq .afaq-b:after{transform:rotate(90deg)}
+.faq .afaq-q:hover .afaq-b{background:#e8e8e8}
+.faq .afaq-i.on .afaq-b{background:#111;transform:rotate(135deg)}.faq .afaq-i.on .afaq-b:before,.faq .afaq-i.on .afaq-b:after{background:#fff}
+.faq .afaq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}
+.faq .afaq-a>div{overflow:hidden}
+.faq .afaq-a p{margin:0;padding:0 56px 24px 0;color:#4d4d4d;font-size:var(--fs-body);line-height:var(--lh-body);opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .35s}
+.faq .afaq-i.on .afaq-a{grid-template-rows:1fr}.faq .afaq-i.on .afaq-a p{opacity:1;transform:none;transition-delay:.08s}
+@media(prefers-reduced-motion:reduce){.faq .afaq-a,.faq .afaq-a p,.faq .afaq-b{transition:none}}
+@media(max-width:1024px){.faq .afaq{gap:40px}}
+@media(max-width:760px){.faq .afaq{grid-template-columns:1fr;gap:32px}.faq .afaq-h{position:static}.faq .afaq-q{padding:20px 0}.faq .afaq-a p{padding-right:0}}
 
 /* closing band */
 .close{padding:160px 0 128px;text-align:center}
@@ -696,7 +704,7 @@ footer .row + .row{margin-top:24px;padding-top:24px}
       <div class="in"><div class="w">
         <h2>Будуємо разом</h2>
         <p>Платформа росте разом із тими,<br> хто нею користується</p>
-        <div class="acts"><a class="btn pri" href="#start">Приєднатися</a><a class="btn ghost" href="uk/about.html">Про нас</a></div>
+        <div class="acts"><a class="btn pri" href="https://app.aita.world/auth/register" data-signup>Приєднатися</a><a class="btn ghost" href="uk/about.html">Про нас</a></div>
       </div></div>
     </div>
   </section>
@@ -802,19 +810,17 @@ footer .row + .row{margin-top:24px;padding-top:24px}
   </section>
 
   <section class="sec faq" id="faq">
-    <div class="w">
-      <h2>Питання й відповіді</h2>
-      <div class="faq-l"><details><summary>Навіщо нам ще одна система?</summary><p>Щоб вести клієнтів, проєкти й документи в одній системі, зробленій під енергетику. Ми будуємо спільноту, де ви зможете шукати клієнтів, партнерів, обладнання й послуги.</p></details><details><summary>Це тільки для енергетики?</summary><p>Ні. Якщо ви надаєте або хочете надавати послуги енергетичним компаніям, платформа підходить і вам.</p></details><details><summary>Що з наших інструментів це замінить?</summary><p>Aita замінює CRM, програми для задач і документів, а також програми для проєктування станцій, креслення однолінійних схем і підбору обладнання. Якщо вам потрібне те, чого тут немає, ми можемо зробити це для вас окремим модулем або підключенням до програми, якою ви вже користуєтесь.</p></details><details><summary>Чи підключиться до того, чим ми вже користуємось?</summary><p>Так. Можна підключити пошту, календар, телефонію й креслення у форматі DXF, а також перенести дані з іншої CRM. Якщо потрібної вам програми немає в списку, ми можемо її підключити.</p></details><details><summary>Хто з наших людей що побачить?</summary><p>Права кожному ви даєте самі: тільки переглядати, редагувати або керувати. До кожного проєкту доступ відкривається окремо. Людям ззовні можна відкрити одну папку чи файл за посиланням.</p></details><details><summary>Хто бачить наші дані?</summary><p>Тільки ті, кому ви дали доступ. Можна заборонити ШІ запам'ятовувати ваші документи.</p></details><details><summary>Що ШІ робить сам, а що треба перевіряти?</summary><p>ШІ сам розкладає документи по папках і заповнює дані проєкту, а біля кожного значення показує, з якого документа його взяв. Ще він проєктує станцію й добирає обладнання, а другий агент перевіряє цю роботу. Остаточне рішення за вами.</p></details><details><summary>Чим це краще за спеціалізовані програми для енергетики?</summary><p>Спеціалізована програма робить щось одне, наприклад тільки рахує станцію. В Aita все пов'язане між собою: клієнт, проєкт, розрахунок і документи, тож нічого не треба переносити з однієї програми в іншу.</p></details><details><summary>З чого почати?</summary><p>З того, що вам потрібно найбільше. Зазвичай починають із клієнтів і проєктів, а решту додають пізніше.</p></details><details><summary>Чи треба все робити вручну?</summary><p>Ні. Можна написати ШІ або сказати голосом, що треба зробити, і він це зробить.</p></details><details><summary>Чи можна спробувати безкоштовно?</summary><p>Так. Перші 7 днів ви користуєтеся ШІ на 10 євро безкоштовно. Після цього доступ до платформи залишається, але щоб працювати з ШІ, потрібно купити пакет.</p></details></div>
-    </div>
+    <div class="w"><div class="afaq"><div class="afaq-h"><span class="afaq-l">Питання</span><h2>Часті питання, <span>короткі відповіді</span></h2></div><div class="afaq-list"><div class="afaq-i on"><button class="afaq-q" type="button" aria-expanded="true">Навіщо нам ще одна система?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Щоб вести клієнтів, проєкти й документи в одній системі, зробленій під енергетику. Ми будуємо спільноту, де ви зможете шукати клієнтів, партнерів, обладнання й послуги.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Це тільки для енергетики?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Ні. Якщо ви надаєте або хочете надавати послуги енергетичним компаніям, платформа підходить і вам.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Що з наших інструментів це замінить?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Aita замінює CRM, програми для задач і документів, а також програми для проєктування станцій, креслення однолінійних схем і підбору обладнання. Якщо вам потрібне те, чого тут немає, ми можемо зробити це для вас окремим модулем або підключенням до програми, якою ви вже користуєтесь.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чи підключиться до того, чим ми вже користуємось?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Так. Можна підключити пошту, календар, телефонію й креслення у форматі DXF, а також перенести дані з іншої CRM. Якщо потрібної вам програми немає в списку, ми можемо її підключити.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Хто з наших людей що побачить?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Права кожному ви даєте самі: тільки переглядати, редагувати або керувати. До кожного проєкту доступ відкривається окремо. Людям ззовні можна відкрити одну папку чи файл за посиланням.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Хто бачить наші дані?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Тільки ті, кому ви дали доступ. Можна заборонити ШІ запам'ятовувати ваші документи.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Що ШІ робить сам, а що треба перевіряти?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>ШІ сам розкладає документи по папках і заповнює дані проєкту, а біля кожного значення показує, з якого документа його взяв. Ще він проєктує станцію й добирає обладнання, а другий агент перевіряє цю роботу. Остаточне рішення за вами.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чим це краще за спеціалізовані програми для енергетики?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Спеціалізована програма робить щось одне, наприклад тільки рахує станцію. В Aita все пов'язане між собою: клієнт, проєкт, розрахунок і документи, тож нічого не треба переносити з однієї програми в іншу.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">З чого почати?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>З того, що вам потрібно найбільше. Зазвичай починають із клієнтів і проєктів, а решту додають пізніше.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чи треба все робити вручну?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Ні. Можна написати ШІ або сказати голосом, що треба зробити, і він це зробить.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Чи можна спробувати безкоштовно?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Так. Перші 7 днів ви користуєтеся ШІ на 10 євро безкоштовно. Після цього доступ до платформи залишається, але щоб працювати з ШІ, потрібно купити пакет.</p></div></div></div></div></div></div>
   </section>
+<script>/* FAQ: one item open at a time */document.querySelectorAll(".faq .afaq").forEach(function(f){var it=f.querySelectorAll(".afaq-i");it.forEach(function(i){i.querySelector(".afaq-q").addEventListener("click",function(){var o=!i.classList.contains("on");it.forEach(function(x){x.classList.remove("on");x.querySelector(".afaq-q").setAttribute("aria-expanded","false")});if(o){i.classList.add("on");this.setAttribute("aria-expanded","true")}})})});</script>
 
   <section class="close" id="start">
     <div class="w">
       <h2 id="demo">Почніть роботу в Aita</h2>
       <p>Перенесемо клієнтів і проєкти з вашої нинішньої системи</p>
       <div class="acts">
-        <a class="btn pri" href="#start">Зареєструватися</a>
-        <a class="btn alt" href="#demo">Записатися на демо</a>
+        <a class="btn pri" href="https://app.aita.world/auth/register" data-signup>Зареєструватися</a>
+        <a class="btn alt" href="uk/demo.html">Записатися на демо</a>
       </div>
     </div>
   </section>

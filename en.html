@@ -495,20 +495,28 @@ html{scroll-behavior:smooth}
 
 
 
-/* FAQ: questions from client calls (Bohdan), answers approved by Marina 20.11.2026 — heading left, list right, hairlines, native details */
-.faq .w{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
-.faq h2{margin:0}
-.faq-l{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:20px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"";flex:none;width:12px;height:12px;margin-top:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg);transition:transform .2s}
-.faq details[open] summary:after{transform:translateY(5px) rotate(-135deg)}
-.faq summary:hover:after{border-color:var(--ink)}
-.faq summary:focus-visible{outline:2px solid #0060ff;outline-offset:2px}
-.faq details p{margin:0;padding:0 48px 24px 0;max-width:720px;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--mute)}
-@media (max-width:1024px){.faq .w{grid-template-columns:1fr;gap:var(--sp-head,32px)}}
-@media (max-width:760px){.faq summary{padding:16px 0}.faq details p{padding-right:0;padding-bottom:20px}}
+
+/* FAQ: same design as the «Питання» block on the pricing page (afaq) — label, two-tone heading, +/× buttons, one item open at a time; type on the page scale */
+.faq .afaq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:64px;align-items:start}
+.faq .afaq-h{position:sticky;top:96px}
+.faq .afaq-l{display:inline-block;font-size:var(--fs-ui);line-height:var(--lh-ui);font-weight:500;padding:4px 10px;border:1px solid var(--line);border-radius:8px;color:#4d4d4d;background:#fff}
+.faq .afaq-h h2{margin:20px 0 0;text-wrap:balance}.faq .afaq-h h2 span{color:#8a8a8a}
+.faq .afaq-list{border-top:1px solid var(--line)}
+.faq .afaq-i{border-bottom:1px solid var(--line)}
+.faq .afaq-q{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink);cursor:pointer}
+.faq .afaq-q:focus-visible{outline:2px solid #111;outline-offset:4px;border-radius:4px}
+.faq .afaq-b{flex:none;width:32px;height:32px;border-radius:50%;background:#f2f2f2;position:relative;transition:background .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.faq .afaq-b:before,.faq .afaq-b:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;margin:-.8px 0 0 -6px;background:#111;border-radius:2px;transition:background .25s}
+.faq .afaq-b:after{transform:rotate(90deg)}
+.faq .afaq-q:hover .afaq-b{background:#e8e8e8}
+.faq .afaq-i.on .afaq-b{background:#111;transform:rotate(135deg)}.faq .afaq-i.on .afaq-b:before,.faq .afaq-i.on .afaq-b:after{background:#fff}
+.faq .afaq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}
+.faq .afaq-a>div{overflow:hidden}
+.faq .afaq-a p{margin:0;padding:0 56px 24px 0;color:#4d4d4d;font-size:var(--fs-body);line-height:var(--lh-body);opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .35s}
+.faq .afaq-i.on .afaq-a{grid-template-rows:1fr}.faq .afaq-i.on .afaq-a p{opacity:1;transform:none;transition-delay:.08s}
+@media(prefers-reduced-motion:reduce){.faq .afaq-a,.faq .afaq-a p,.faq .afaq-b{transition:none}}
+@media(max-width:1024px){.faq .afaq{gap:40px}}
+@media(max-width:760px){.faq .afaq{grid-template-columns:1fr;gap:32px}.faq .afaq-h{position:static}.faq .afaq-q{padding:20px 0}.faq .afaq-a p{padding-right:0}}
 
 /* closing band */
 .close{padding:160px 0 128px;text-align:center}
@@ -696,7 +704,7 @@ footer .row + .row{margin-top:24px;padding-top:24px}
       <div class="in"><div class="w">
         <h2>Building it together</h2>
         <p>The platform grows together with<br> the people who use it</p>
-        <div class="acts"><a class="btn pri" href="#start">Join us</a><a class="btn ghost" href="uk/about.html">About us</a></div>
+        <div class="acts"><a class="btn pri" href="https://app.aita.world/auth/register" data-signup>Join us</a><a class="btn ghost" href="uk/about.html">About us</a></div>
       </div></div>
     </div>
   </section>
@@ -802,19 +810,17 @@ footer .row + .row{margin-top:24px;padding-top:24px}
   </section>
 
   <section class="sec faq" id="faq">
-    <div class="w">
-      <h2>Questions and answers</h2>
-      <div class="faq-l"><details><summary>Why do we need another system?</summary><p>To run clients, projects and documents in one system built for energy. We are building a community where you will be able to find clients, partners, equipment and services.</p></details><details><summary>Is it only for energy?</summary><p>No. If you provide, or want to provide, services to energy companies, the platform works for you too.</p></details><details><summary>Which of our tools will it replace?</summary><p>Aita replaces your CRM, task and document tools, and the software for plant design, single-line diagrams and equipment selection. If you need something that isn’t here, we can build it for you as a separate module or connect the software you already use.</p></details><details><summary>Will it connect to what we already use?</summary><p>Yes. You can connect email, calendar, telephony and DXF drawings, and move your data over from another CRM. If the software you need isn’t on the list, we can connect it.</p></details><details><summary>Who on our team will see what?</summary><p>You set each person’s rights yourself: view only, edit or manage. Access to each project is opened separately. People outside the company can be given one folder or file by link.</p></details><details><summary>Who can see our data?</summary><p>Only the people you give access to. You can forbid the AI from remembering your documents.</p></details><details><summary>What does the AI do on its own, and what should we check?</summary><p>The AI sorts documents into folders and fills in project data on its own, and next to each value shows which document it came from. It also designs the plant and selects equipment, and a second agent checks that work. The final decision is yours.</p></details><details><summary>How is it better than specialised energy software?</summary><p>Specialised software does one thing, for example only calculates the plant. In Aita everything is connected: the client, the project, the calculation and the documents, so nothing has to be moved from one program to another.</p></details><details><summary>Where do we start?</summary><p>With what you need most. Most teams start with clients and projects and add the rest later.</p></details><details><summary>Do we have to do everything by hand?</summary><p>No. You can write to the AI or tell it by voice what needs doing, and it will do it.</p></details><details><summary>Can we try it for free?</summary><p>Yes. For the first 7 days you get €10 of AI use for free. After that you keep access to the platform, but to work with the AI you need to buy a plan.</p></details></div>
-    </div>
+    <div class="w"><div class="afaq"><div class="afaq-h"><span class="afaq-l">Questions</span><h2>Frequently asked questions, <span>short answers</span></h2></div><div class="afaq-list"><div class="afaq-i on"><button class="afaq-q" type="button" aria-expanded="true">Why do we need another system?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>To run clients, projects and documents in one system built for energy. We are building a community where you will be able to find clients, partners, equipment and services.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Is it only for energy?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>No. If you provide, or want to provide, services to energy companies, the platform works for you too.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Which of our tools will it replace?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Aita replaces your CRM, task and document tools, and the software for plant design, single-line diagrams and equipment selection. If you need something that isn’t here, we can build it for you as a separate module or connect the software you already use.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Will it connect to what we already use?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Yes. You can connect email, calendar, telephony and DXF drawings, and move your data over from another CRM. If the software you need isn’t on the list, we can connect it.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Who on our team will see what?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>You set each person’s rights yourself: view only, edit or manage. Access to each project is opened separately. People outside the company can be given one folder or file by link.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Who can see our data?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Only the people you give access to. You can forbid the AI from remembering your documents.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">What does the AI do on its own, and what should we check?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>The AI sorts documents into folders and fills in project data on its own, and next to each value shows which document it came from. It also designs the plant and selects equipment, and a second agent checks that work. The final decision is yours.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">How is it better than specialised energy software?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Specialised software does one thing, for example only calculates the plant. In Aita everything is connected: the client, the project, the calculation and the documents, so nothing has to be moved from one program to another.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Where do we start?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>With what you need most. Most teams start with clients and projects and add the rest later.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Do we have to do everything by hand?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>No. You can write to the AI or tell it by voice what needs doing, and it will do it.</p></div></div></div><div class="afaq-i"><button class="afaq-q" type="button" aria-expanded="false">Can we try it for free?<span class="afaq-b" aria-hidden="true"></span></button><div class="afaq-a"><div><p>Yes. For the first 7 days you get €10 of AI use for free. After that you keep access to the platform, but to work with the AI you need to buy a plan.</p></div></div></div></div></div></div>
   </section>
+<script>/* FAQ: one item open at a time */document.querySelectorAll(".faq .afaq").forEach(function(f){var it=f.querySelectorAll(".afaq-i");it.forEach(function(i){i.querySelector(".afaq-q").addEventListener("click",function(){var o=!i.classList.contains("on");it.forEach(function(x){x.classList.remove("on");x.querySelector(".afaq-q").setAttribute("aria-expanded","false")});if(o){i.classList.add("on");this.setAttribute("aria-expanded","true")}})})});</script>
 
   <section class="close" id="start">
     <div class="w">
       <h2 id="demo">Get started with Aita</h2>
       <p>We’ll move your clients and projects over from your current system</p>
       <div class="acts">
-        <a class="btn pri" href="#start">Sign up</a>
-        <a class="btn alt" href="#demo">Book a demo</a>
+        <a class="btn pri" href="https://app.aita.world/auth/register" data-signup>Sign up</a>
+        <a class="btn alt" href="uk/demo.html">Book a demo</a>
       </div>
     </div>
   </section>
