@@ -358,7 +358,7 @@ html{scroll-behavior:smooth}
 .prow{margin-top:48px;display:flex;flex-direction:column}
 .pbig{position:relative;margin:0;height:min(640px,80vh);min-height:440px;overflow:hidden;background:#2b2c2d;color:#fff}
 .pbig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.pbig::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.32) 30%,rgba(0,0,0,.08) 55%,rgba(0,0,0,0) 72%);pointer-events:none}
+.pbig::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--pc,0,0,0),.92) 0%,rgba(var(--pc,0,0,0),.78) 22%,rgba(var(--pc,0,0,0),.45) 42%,rgba(var(--pc,0,0,0),.12) 62%,rgba(var(--pc,0,0,0),0) 78%);pointer-events:none}
 .pbig figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:72px}
 .pbig h3{margin:0;max-width:900px;font-size:var(--fs-display);line-height:var(--lh-display);font-weight:500;letter-spacing:-.025em}
 .pbig p{margin:20px 0 0;max-width:560px;font-size:var(--fs-lead);line-height:var(--lh-lead);color:rgba(255,255,255,.82)}
@@ -368,6 +368,118 @@ html{scroll-behavior:smooth}
 
 /* «Уся компанія» on phones: show the 10 core modules only; the rest are behind «Усі модулі →» */
 @media (max-width:760px){ .mpl-x{display:none!important} }
+
+
+/* «Уся компанія» — Hashnode «And everything else» layout: white panel, 4 grouped columns, icon tile + label, «пілот» badge */
+.mpanel{background:#fff;border-radius:24px;padding:64px 56px 48px}
+.mpanel h2{text-align:center}
+.mgrid{margin-top:48px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 32px}
+.mgc b{display:block;margin-bottom:16px;font-weight:500;font-size:var(--fs-ui);line-height:var(--lh-ui);color:var(--faint)}
+.mgc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mgc a{display:flex;align-items:center;gap:12px;min-height:44px;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--ink)}
+.mgc a:hover span:nth-child(2){text-decoration:underline;text-underline-offset:3px}
+.mgc .mi{flex:none;width:36px;height:36px;border-radius:8px;background:#f3f4f6;border:0;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.mgc .mi svg{width:18px;height:18px}
+.mgc em{font-style:normal;padding:2px 8px;border-radius:999px;background:#FDF3D8;color:#8a5a00;font-size:var(--fs-note);line-height:var(--lh-note);font-weight:500}
+.mpanel .more{display:block;width:max-content;margin:32px auto 0}
+@media (max-width:1024px){ .mpanel{padding:48px 32px 40px} .mgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:760px){ .mpanel{padding:40px 20px 32px;border-radius:16px} .mgrid{margin-top:32px;gap:28px 16px} .mgc .mx{display:none} .mgc a{gap:10px;font-size:15px} .mgc .mi{width:32px;height:32px} }
+
+/* hero h1 on phones: tighter leading (40/40 instead of 40/44) */
+@media (max-width:760px){ .hero h1{line-height:40px} }
+
+
+
+
+/* «Для тих, хто працює з енергетикою» — Vizcom structure (heading + demo button, 7 big ICP names split by hairlines) in the landing's own visual: white page, ink text, landing type scale */
+.icpl{padding:var(--sp-sec,128px) 0 0}
+.icpl-h{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.icpl-h h2{margin:0;text-align:left;font-size:var(--fs-h2);line-height:var(--lh-h2);font-weight:500;letter-spacing:-.02em}
+.icpl-list{list-style:none;margin:48px 0 0;padding:0;border-top:1px solid var(--line)}
+.icpl-list li{display:flex;align-items:baseline;justify-content:space-between;gap:32px;padding:24px 0;border-bottom:1px solid var(--line)}
+.icp-n{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-.015em;color:var(--ink)}
+.icp-d{flex:none;max-width:360px;text-align:right;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--faint)}
+@media (max-width:760px){ .icpl-h{flex-direction:column;align-items:flex-start;gap:16px} .icpl-list li{flex-direction:column;gap:4px;padding:16px 0} .icp-d{text-align:left;max-width:none;font-size:var(--fs-ui);line-height:var(--lh-ui)} .icp-n{font-size:24px;line-height:32px} }
+
+
+/* ICP list: desktop = name left, line right (button is inert); phones = accordion like the reference (name + «+», tap reveals the line) */
+.icp-row-b{all:unset;display:block;cursor:default}
+.icp-x{display:none}
+@media (min-width:761px){ .icpl-list li{display:flex} .icp-row-b{flex:1;min-width:0} }
+@media (max-width:760px){
+  .icpl-list li{display:block;padding:0}
+  .icp-row-b{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:56px;padding:12px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .icp-row-b:focus-visible{outline:2px solid #0060ff;outline-offset:2px}
+  .icp-x{display:block;position:relative;flex:none;width:16px;height:16px}
+  .icp-x::before,.icp-x::after{content:"";position:absolute;left:0;right:0;top:7.5px;height:1px;background:var(--faint);transition:transform .2s}
+  .icp-x::after{transform:rotate(90deg)}
+  .icpl-list li.open .icp-x::after{transform:rotate(0)}
+  .icp-d{display:none;padding:0 0 16px}
+  .icpl-list li.open .icp-d{display:block}
+}
+
+
+/* ICP on desktop: tile grid (reference: concrete-furniture catalogue) — 4×4 square tiles, ICP text tiles between picture tiles, hairline gaps. Phones keep the accordion list */
+.icpg{display:none}
+@media (min-width:761px){
+  .icpl-list{display:none}
+  .icpg{margin-top:80px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .icpg > div{aspect-ratio:1/1;background:#f3f4f6;overflow:hidden;position:relative}
+  .ig-i img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .ig-i.ui img{inset:auto 0 32px 32px;width:calc(100% - 32px);height:auto;max-height:calc(100% - 64px);object-fit:cover;object-position:left top;border-radius:10px 0 0 10px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px -12px rgba(0,0,0,.18);background:#fff}
+  .ig-t{display:flex;flex-direction:column;justify-content:space-between;padding:24px}
+  .ig-t h3{margin:0;font-size:var(--fs-h3);line-height:var(--lh-h3);font-weight:500;letter-spacing:-.01em;text-wrap:balance}
+  .ig-t p{margin:0;max-width:260px;font-size:var(--fs-ui);line-height:var(--lh-ui);color:var(--faint)}
+}
+@media (min-width:761px){ .icpg > div{background:none} .ig-t{padding:24px 24px 24px 0} }
+@media (min-width:761px) and (max-width:1100px){ .ig-t{padding:16px} .ig-t h3{font-size:20px;line-height:28px} }
+
+
+
+@media (max-width:760px){ .icpl-h .btn{display:none} }
+
+/* ICP on phones: plain list of names — no accordion, no descriptions */
+@media (max-width:760px){
+  .icp-x,.icpl-list .icp-d,.icpl-list li.open .icp-d{display:none!important}
+  .icp-row-b{cursor:default;min-height:0;padding:16px 0}
+}
+
+/* «Уся компанія»: live-landing article cards; heading left like other sections, «all modules» link below */
+#work .nb-h2{text-align:left}
+#work .nb{margin-top:var(--sp-head,48px);padding-top:0!important}
+#work .nb-wide{background:#fff!important}
+#work .nb-all{display:inline-block;margin-top:32px}
+
+.pbig .pk{display:inline-block;margin-bottom:16px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:var(--fs-ui);line-height:var(--lh-ui);font-weight:500;color:#fff}
+
+
+/* «Для кого» — same layout as the earlier modules panel (Hashnode «everything else»): white panel, grouped columns, icon tile + name + one line */
+.ipanel{margin-top:48px;background:#F7F9FF;border-radius:24px;padding:56px}
+.ipgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}
+.ipc h3{margin:0 0 16px;font-size:var(--fs-ui);line-height:var(--lh-ui);font-weight:500;color:var(--faint)}
+.ipc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.ipc li{display:flex;align-items:flex-start;gap:14px}
+.ipc .mi{flex:none;width:40px;height:40px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.ipc .mi svg{width:20px;height:20px}
+.ip-t{display:flex;flex-direction:column;gap:2px;padding-top:1px}
+.ip-t b{font-weight:500;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--ink)}
+.ip-t small{font-size:var(--fs-ui);line-height:var(--lh-ui);color:var(--faint)}
+@media (max-width:1024px){ .ipanel{padding:40px 32px} .ipgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:760px){ .ipanel{margin-top:32px;padding:28px 20px;border-radius:16px} .ipgrid{grid-template-columns:1fr;gap:28px} }
+
+/* «Для кого» as module-style pills on a light panel */
+.icp-pills{margin-top:48px;padding:40px;border-radius:24px;background:#F7F9FF!important;text-align:center}
+.icp-pills .mpl{cursor:default}
+.icp-pills .mpl:hover{box-shadow:none}
+@media (max-width:760px){ .icp-pills{margin-top:32px;padding:24px 16px;border-radius:16px} }
+
+/* «Для кого»: centred heading, light-blue band like «Що ви отримуєте», no button; flows into the next band */
+#who.icpl{background:#F7F9FF;padding:var(--sp-sec,128px) 0 0;margin-bottom:0}
+#who .icpl-h{justify-content:center;text-align:center}
+#who .icpl-h h2{text-align:center}
+#who .icp-pills{background:none!important;padding:0;margin-top:40px}
+#who + .sec.band{margin-top:0;background:linear-gradient(var(--g,#F7F9FF),var(--g,#F7F9FF) calc(100% - 120px),#fff)}
+@media (max-width:760px){ #who .icp-pills{margin-top:28px} }
 
 /* closing band */
 .close{padding:160px 0 128px;text-align:center}
@@ -443,6 +555,55 @@ footer .copy{margin-left:auto}
 .prow,
 .one1 .g{margin-top:var(--sp-head)}
 
+
+/* ===== inner-spacing overrides (review 19.11) ===== */
+/* 1 · «Що ви отримуєте» top cards: same inset for pictures (24) and text (32) */
+.card.mkt{padding:24px 24px 32px 32px}
+/* 2 · team photo caption = hero/projects caption */
+.team-hero h2{margin-bottom:0}
+.team-hero p{margin-top:20px}
+.team-hero .acts{margin-top:32px}
+.team-hero .in{padding-bottom:72px}
+/* 3 · project captions: same optical correction as hero h1 / team h2 */
+.pbig h3{margin-left:-.055em}
+/* 4 · module pills on 8-px grid */
+.mcap{margin-bottom:16px}
+.mpls{gap:8px}
+.mpl{gap:8px}
+.mlist .more{margin-top:32px}
+/* 5 · price cards */
+.one1 .c{padding:32px;border-radius:16px}
+.one1 .lk{margin-left:0;margin-top:24px}
+/* 6 · services captions: equal inset */
+.svc figcaption{bottom:24px}
+/* 7 · marketplace title row on the 28-px line */
+.svc-more p:first-child{display:flex;align-items:center;gap:8px}
+.svc-more p:first-child .tag{margin-left:0}
+/* 8 · footer */
+footer .soon{display:inline-flex;align-items:center;gap:8px}
+footer .soon i{margin-left:0;padding:0 8px;line-height:20px}
+footer .row + .row{margin-top:24px;padding-top:24px}
+/* 9 · closing text */
+.close p{text-wrap:balance}
+@media (max-width:760px){
+  .svc figcaption{bottom:32px}
+  .bc .tx{padding:4px 24px 24px}
+  .team-hero .acts{margin-top:32px}
+  .gets3{padding:8px 24px}
+  .gets3:not(.gets2) .card{padding:16px 0;column-gap:16px;row-gap:4px;align-items:start}
+  .gets3 .card h3{font-size:16px;line-height:24px}
+  .gets2 .cl-shot{margin:0 0 16px!important}
+  .gets2 .card.mkt .map{margin-bottom:16px}
+  .svc-dots{gap:0;margin-top:-2px}
+  .svc-dots button,.svc-dots button.on{position:relative;width:24px;height:44px;border-radius:0;background:none}
+  .svc-dots button::before{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:4px;background:#d4d4d4;transition:width .2s,margin-left .2s,background-color .2s}
+  .svc-dots button.on::before{width:20px;margin-left:-10px;background:var(--ink)}
+  .svc-dots + .w .svc-more{margin-top:22px}
+  .more,.one1 .lk{display:inline-flex;align-items:center;min-height:44px}
+  .mlist .more{margin-top:22px}
+  .svc-more .more{margin-top:6px}
+  .one1 .lk{margin-top:14px}
+}
 </style>
 </head>
 <body>
@@ -479,37 +640,10 @@ footer .copy{margin-left:auto}
   </section>
 
 
-  <section class="sec c" id="who">
+  <section class="icpl" id="who">
     <div class="w">
-      <h2>Для тих, хто працює з енергетикою</h2>
-      <ul class="sr">
-      <li>Забудовники станцій</li>
-      <li>Будівництво під ключ (EPC)</li>
-      <li>Постачальники й магазини обладнання</li>
-      <li>Монтажники</li>
-      <li>Виробники обладнання</li>
-      <li>Проєктні бюро</li>
-      <li>Обслуговування станцій (O&amp;M)</li>
-    </ul>
-    <div class="team" id="team">
-      <div class="bento">
-        <div class="bc">
-          <div class="frag" data-crop="300,100,960,392" data-cur="Забудовники станцій~#7048e8~477,183|Будівництво під ключ (EPC)~#d9480f~742,121" aria-hidden="true"><div class="vp"><img src="img/who-ov.jpg" alt="" width="660" height="292" decoding="async" style="left:300px;top:100px"></div></div>
-          <div class="tx"><h3>Один етап для всіх</h3><p>Забудовник і EPC бачать, на якому етапі станція і що зараз блокує роботу.</p></div>
-        </div>
-        <div class="bc">
-          <div class="frag" data-crop="590,215,1240,503" data-cur="Постачальники й магазини обладнання~#2b8a3e~840,298|Монтажники~#0c8599~1060,394" aria-hidden="true"><div class="vp"><img src="img/who-tasks.jpg" alt="" width="650" height="288" decoding="async" style="left:590px;top:215px"></div></div>
-          <div class="tx"><h3>Задачі між компаніями</h3><p>Хто кому що винен і до коли: договір EPC, трансформатор, графік поставок.</p></div>
-        </div>
-        <div class="bc">
-          <div class="frag" data-crop="380,120,1020,403" data-cur="Виробники обладнання~#c2255c~620,237" aria-hidden="true"><div class="vp"><img src="img/who-chat.jpg" alt="" width="640" height="283" decoding="async" style="left:380px;top:120px"></div></div>
-          <div class="tx"><h3>Розмова прямо в проєкті</h3><p>Повідомлення лежать поруч із проєктом, а Aita сама ставить задачі з розмови.</p></div>
-        </div>
-        <div class="bc">
-          <div class="frag" data-crop="590,550,1240,838" data-cur="Проєктні бюро~#0b6ad6~720,721|Обслуговування станцій (O&amp;M)~#5c5f66~1072,625" aria-hidden="true"><div class="vp"><img src="img/who-dr.jpg" alt="" width="650" height="288" decoding="async" style="left:590px;top:550px"></div></div>
-          <div class="tx"><h3>Спільний датарум</h3><p>ТУ, договори, 3D-модель і документи по BESS — в одному місці для всіх учасників.</p></div>
-        </div>
-      </div>
+      <div class="icpl-h"><h2>Для тих, хто працює з енергетикою</h2></div>
+      <div class="mlist icp-pills"><div class="mpls"><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg>Забудовники станцій</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V9l8-4 8 4v11"/><path d="M8 13h8M8 16h8"/></svg>Будівництво під ключ (EPC)</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>Проєктні бюро</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>Монтажники</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>Постачальники обладнання</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5 3V10l5 3V10l5 3V5h3v16z"/></svg>Виробники обладнання</span><span class="mpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>Обслуговування станцій (O&amp;M)</span></div></div></div>
     </div>
   </section>
 
@@ -554,14 +688,56 @@ footer .copy{margin-left:auto}
 
   <section class="sec band" id="work">
     <div class="w">
-      <div class="mods">
-        <h2>Уся компанія в одному місці</h2>
-        <div class="mlist">
-          <p class="mcap">У кожному пакеті:</p>
-          <div class="mpls"><a class="mpl" href="https://www.aita.world/uk/modules/leads"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Ліди</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/contacts"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>Контакти</a><a class="mpl" href="https://www.aita.world/uk/modules/organizations"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5l8-2v18M12 9h8v12M3 21h18"/></svg>Організації</a><a class="mpl" href="https://www.aita.world/uk/modules/projects"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="10" rx="1"/><path d="M3 11h18M9 6v10M15 6v10M12 16v3M8 19h8"/></svg>Проєкти<span class="tag">пілот</span></a><a class="mpl" href="https://www.aita.world/uk/modules/tasks"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>Завдання</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/chat"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12z"/></svg>Чат</a><a class="mpl" href="https://www.aita.world/uk/modules/calendar"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Календар</a><a class="mpl" href="https://www.aita.world/uk/modules/mail"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Пошта</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/meeting-notes"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Нотатки зустрічей</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/drafts"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Драфти</a><a class="mpl" href="https://www.aita.world/uk/modules/storage"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Сховище</a><a class="mpl" href="https://www.aita.world/uk/modules/contracts"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Договори</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/knowledge-base"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg>База знань</a><a class="mpl" href="https://www.aita.world/uk/modules/finance"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></svg>Фінанси<span class="tag">пілот</span></a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/goals"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Цілі</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/decisions"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M5 7l-2 6a3 3 0 0 0 4 0zM19 7l-2 6a3 3 0 0 0 4 0z"/></svg>Журнал рішень</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/competitors"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7 7M20 4l-7 7M4 20l16-16M9 15l-5 5M15 15l5 5"/></svg>Конкуренти</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/network"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5l-5.5 5.5M12 11.5l5.5 5.5"/></svg>Мережа</a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/work-market"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l1-5h14l1 5M4 9h16v11H4zM9 20v-6h6v6"/></svg>Ринок робіт<span class="tag">пілот</span></a><a class="mpl mpl-x" href="https://www.aita.world/uk/modules/orders"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Замовлення</a><a class="mpl" href="https://www.aita.world/uk/modules/agent"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>AI-агент</a></div>
-          <a class="more" href="https://www.aita.world/uk/modules">Усі модулі →</a>
-        </div>
-      </div>
+      <h2 class="nb-h2">Уся компанія в одному місці</h2>
+      <!-- modules from Marina's draft in the visual of the live-landing article cards (.nb); links lead to module pages -->
+      <div class="nb"><style>
+/* блоки функцій (27.10.2026, за референсами Антона): широка картка «текст ліворуч — екран праворуч, обрізаний краєм» + ряд із трьох карток «екран зверху — текст знизу» */
+.nb{display:flex;flex-direction:column;gap:20px;padding:24px 0 0}
+.nb-wide{display:grid;grid-template-columns:5fr 7fr;height:480px;border-radius:24px;background:#f7f7f7;overflow:hidden}
+.nb-wide .nb-t{padding:40px;display:flex;flex-direction:column}
+.nb-wide .nb-t h3{font-size:32px;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:500;text-wrap:balance}
+.nb-wide .nb-t .fsub{margin:16px 0 0}
+.nb-wide .nb-t .more2{margin-top:auto;align-self:flex-start}
+.nb-wide .nb-s{position:relative;overflow:hidden}
+.nb-three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.nb-card{border:1px solid var(--line);border-radius:24px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.nb-card .nb-s{position:relative;height:340px;overflow:hidden;background:#f7f7f7}
+.nb-card .nb-t{padding:24px 28px 28px;display:flex;flex-direction:column;flex:1}
+.nb-card .nb-t h3{font-size:20px;line-height:1.25;margin:0;font-weight:500;letter-spacing:-.01em;text-wrap:balance}
+.nb-card .nb-t .fsub{margin:8px 0 0;font-size:15px;line-height:22px}
+.nb-card .nb-t .more2{margin-top:16px;font-size:15px}
+.nb .frame{position:absolute;overflow:hidden;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.08);pointer-events:none;user-select:none;background:#fff}
+.nb .fsub{color:var(--mute)}
+.nb .more2{color:#8a8a8a}.nb .more2:hover{color:#111}
+.nb iframe{border:0;display:block;transform-origin:0 0;position:absolute;left:0;top:0;background:#fff;pointer-events:none}
+.nb .ph{border-radius:12px 0 0 0;background:#ececec;display:grid;place-items:center;color:#8a8a8a;font-size:14px;text-align:center;padding:24px}
+@media(max-width:760px){.nb-wide{grid-template-columns:1fr;height:auto}.nb-wide .nb-t{padding:28px}.nb-wide .nb-t h3{font-size:24px}.nb-wide .nb-t .more2{margin-top:16px}.nb-wide .nb-s{height:300px;padding:0 0 0 28px}.nb-three{grid-template-columns:1fr}}
+.nb{gap:32px!important}.nb-three{gap:32px!important}
+.nb-three .nb-card:nth-child(1) .nb-s{background:#eef8ee!important}
+.nb-three .nb-card:nth-child(2) .nb-s{background:#fff6e2!important}
+.nb-three .nb-card:nth-child(3) .nb-s{background:#fdeeee!important}
+.mem-mini .mem-s:after{background:linear-gradient(rgba(255,246,226,0),#fff6e2)!important}
+.nb-two{grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.nb-two{grid-template-columns:1fr}}
+.nb iframe{background:transparent}
+@media(max-width:760px){.nb-wide .nb-s{height:320px}}
+
+/* module version: image shots inside .nb-s, cards are links */
+#work .nb a{color:inherit;text-decoration:none}
+#work .nb .shot{position:absolute;left:28px;top:28px;width:calc(100% + 24px);max-width:none;height:auto;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.08);background:#fff}
+#work .nb-wide .shot{left:0;top:40px;width:calc(100% + 40px)}
+/* small cards: window spans the full card width (no coloured sides) and sits in the vertical middle */
+#work .nb-card .shot{left:0;right:0;top:50%;width:100%;transform:translateY(-50%);border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px -12px rgba(0,0,0,.12)}
+#work .nb-card .shot:not(.fr){height:auto;max-height:100%;object-fit:cover}
+#work .nb-wide .nb-s{position:relative}
+#work .nb-t h3 .tag{margin-left:10px}
+#work .nb .shot.fr{overflow:hidden}
+#work .nb .shot.fr iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+#work .nb a:hover .more2{color:#111}
+#work .nb-two .nb-card:nth-child(1) .nb-s{background:#eef4ff!important}
+#work .nb-two .nb-card:nth-child(2) .nb-s{background:#f3effe!important}
+</style><a class="nb-wide" href="https://www.aita.world/uk/modules/projects"><div class="nb-t"><h3>Проєкти станцій<span class="tag">пілот</span></h3><p class="fsub">Етапи, гроші, задачі й файли проєкту зібрані в картці, тому команда й інвестор дивляться в одне місце.</p><span class="more2">Дивитись модуль →</span></div><div class="nb-s"><div class="shot fr" data-w="1440" data-h="900" data-x="0" data-y="0" data-vw="1440" data-vh="900" aria-hidden="true"><iframe src="ui/live-projects.html" tabindex="-1" scrolling="no" loading="lazy" title=""></iframe></div></div></a><div class="nb-three"><a class="nb-card" href="https://www.aita.world/uk/modules/projects"><div class="nb-s"><img class="shot" src="img/projects-khorvatskyi.jpg" alt="" loading="lazy" decoding="async"></div><div class="nb-t"><h3>3D-проєктування станцій<span class="tag">пілот</span></h3><p class="fsub">3D-модель, однолінійна схема й кошторис на базі ШІ та власних алгоритмів.</p><span class="more2">Дивитись модуль →</span></div></a><a class="nb-card" href="https://www.aita.world/uk/modules/leads"><div class="nb-s"><div class="shot fr" data-w="1440" data-h="900" data-x="0" data-y="90" data-vw="640" data-vh="520" aria-hidden="true"><iframe src="ui/live-leads.html" tabindex="-1" scrolling="no" loading="lazy" title=""></iframe></div></div><div class="nb-t"><h3>Клієнти й продажі</h3><p class="fsub">Заявки із сайту, пошти й телефону потрапляють у воронку, а картка клієнта доповнюється після кожного листа й дзвінка.</p><span class="more2">Дивитись модуль →</span></div></a><a class="nb-card" href="https://www.aita.world/uk/modules/knowledge-base"><div class="nb-s"><div class="shot fr" data-w="1440" data-h="900" data-x="280" data-y="100" data-vw="880" data-vh="520" aria-hidden="true"><iframe src="ui/live-kb.html" tabindex="-1" scrolling="no" loading="lazy" title=""></iframe></div></div><div class="nb-t"><h3>Документи й база знань</h3><p class="fsub">Файли лежать там, де їх шукатиме команда, а AI-агент бере звідси дані для документів.</p><span class="more2">Дивитись модуль →</span></div></a></div><div class="nb-three nb-two"><a class="nb-card" href="https://www.aita.world/uk/modules/finance"><div class="nb-s"><img class="shot" src="img/mod-finance.jpg" alt="" loading="lazy" decoding="async"></div><div class="nb-t"><h3>Фінмодель для банку<span class="tag">пілот</span></h3><p class="fsub">IRR, NPV і CAPEX станції в одній моделі — для банку й інвестора.</p><span class="more2">Дивитись модуль →</span></div></a><a class="nb-card" href="https://www.aita.world/uk/modules/tasks"><div class="nb-s"><div class="shot fr" data-w="1440" data-h="900" data-x="0" data-y="60" data-vw="1100" data-vh="640" aria-hidden="true"><iframe src="ui/live-tasks.html" tabindex="-1" scrolling="no" loading="lazy" title=""></iframe></div></div><div class="nb-t"><h3>Задачі, пошта, зустрічі</h3><p class="fsub">Дошка показує виконавців, строки й затримки, а кожне завдання зберігає обговорення й файли.</p><span class="more2">Дивитись модуль →</span></div></a></div></div>
+      <a class="more nb-all" href="https://www.aita.world/uk/modules">Дивитись усі модулі →</a>
     </div>
   </section>
 
@@ -587,12 +763,12 @@ footer .copy{margin-left:auto}
       <h2>Проєкти, які вже ведуться в Aita</h2>
     </div>
     <div class="prow">
-      <figure class="pbig"><img src="img/projects-khorvatskyi.jpg" alt="3D-модель сонячної станції «Хорватський гостинець» у редакторі Aita" width="1680" height="800" loading="lazy" decoding="async">
-        <figcaption><div class="w"><h3>Індустріальний парк<br>«Хорватський гостинець»</h3><p>Сонячні панелі 10 МВт + накопичувач, Львівська обл.</p></div></figcaption></figure>
-      <figure class="pbig pempty"><span class="ph">Знімок 3D-моделі</span>
-        <figcaption><div class="w"><h3>Stryi Energy Park</h3><p>Сонячна станція 20 МВт + накопичувач, Львівська обл.</p></div></figcaption></figure>
-      <figure class="pbig pempty"><span class="ph">Знімок карти проєктів</span>
-        <figcaption><div class="w"><h3>Забудовник, Польща</h3><p>5 проєктів на 51 МВт — від ділянки до готового пакета</p></div></figcaption></figure>
+      <figure class="pbig" style="--pc:20,24,18"><img src="img/proj-kyiv-bess.jpg" alt="3D-модель накопичувача біля офісної будівлі в Києві" width="1680" height="1050" loading="lazy" decoding="async">
+        <figcaption><div class="w"><span class="pk">Накопичувач для офісної будівлі</span><h3>Офісна будівля, Київ</h3><p>Дві шафи на 520 кВт·год: резервне живлення і дешевша енергія для будівлі. В Aita — 3D-модель, проєктна документація, договори й розрахунок окупності.</p></div></figcaption></figure>
+      <figure class="pbig" style="--pc:18,26,14"><img src="img/proj-khorvatskyi-bess.jpg" alt="3D-модель накопичувача 200 МВт з підстанцією 330/35 кВ в індустріальному парку" width="1680" height="1050" loading="lazy" decoding="async">
+        <figcaption><div class="w"><span class="pk">Накопичувач з підстанцією · Львівська обл.</span><h3>Індустріальний парк<br>«Хорватський гостинець»</h3><p>Накопичувач 200 МВт / 800 МВт·год з власною підстанцією. В Aita — 3D-модель, кілька варіантів розміщення й розрахунок вартості.</p></div></figcaption></figure>
+      <figure class="pbig" style="--pc:14,26,22"><img src="img/proj-boryslav.jpg" alt="3D-модель сонячної станції 340 кВт" width="1680" height="1050" loading="lazy" decoding="async">
+        <figcaption><div class="w"><span class="pk">Робота станції в 3D за реальними даними</span><h3>Сонячна станція, Борислав</h3><p>Сонячна станція на 340 кВт з накопичувачем. У 3D-моделі видно, скільки дають панелі, скільки віддає батарея і скільки споживає об'єкт.</p></div></figcaption></figure>
     </div>
     <div class="w">
     </div>
@@ -725,6 +901,26 @@ footer .copy{margin-left:auto}
   function tick(){ if(mq.matches && vis && !still && !document.hidden && Date.now()-hold>6000) go(i+1); }
   if(window.IntersectionObserver) new IntersectionObserver(function(es){ vis=es[0].isIntersecting; },{threshold:.5}).observe(r);
   timer=setInterval(tick,4000); mark();
+})();
+
+
+(function(){
+  // ICP accordion on phones: tap a name to show its line; the first one starts open
+  var mq=matchMedia('(max-width: 760px)'), items=[].slice.call(document.querySelectorAll('.icpl-list li'));
+  items.forEach(function(li,i){ var b=li.querySelector('.icp-row-b'); if(!b) return;
+    if(i===0){ li.classList.add('open'); b.setAttribute('aria-expanded','true'); }
+    b.addEventListener('click',function(){ return; var o=li.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+  });
+})();
+
+
+(function(){
+  // DOM-snapshot windows in «Уся компанія» cards: scale the platform page to the card, show the region data-x/y/vw/vh
+  var F=[].slice.call(document.querySelectorAll('#work .shot.fr'));
+  function fit(){ F.forEach(function(b){ var d=b.dataset, f=b.querySelector('iframe'), k=b.clientWidth/(+d.vw);
+    f.style.width=d.w+'px'; f.style.height=d.h+'px'; f.style.transform='translate('+(-d.x*k)+'px,'+(-d.y*k)+'px) scale('+k+')';
+    b.style.height=Math.round(+d.vh*k)+'px'; }); }
+  fit(); if(window.ResizeObserver) F.forEach(function(b){ new ResizeObserver(fit).observe(b); }); else addEventListener('resize',fit);
 })();
 </script>
 </body>
