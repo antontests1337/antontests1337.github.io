@@ -40,7 +40,7 @@
   var GADS_ID = window.AITA_GADS_ID || '';
   var META_PIXEL_ID = window.AITA_META_PIXEL_ID || '1007963848332064';
   // Root-absolute so the link resolves from sub-directory pages (platform/, powerconnect2026/) too.
-  var POLICY_URL = window.AITA_POLICY_URL || 'https://aita.world/legal/cookies';
+  var POLICY_URL = window.AITA_POLICY_URL || '/uk/legal/cookies/index.html';
   var BEACON_ENABLED = false;              // server-side evidentiary log (see maybeBeacon) — off until /api/consent-log exists
   var BEACON_URL = '/api/consent-log';
   // Clarity cookies to clear when analytics consent is withdrawn.

@@ -25,7 +25,7 @@
   + '@media (max-width:1024px){.af .af-w{padding:0 40px}}'
   + '@media (max-width:760px){.af .af-w{padding:0 20px;gap:4px 20px}.af-lsw{margin:16px 0 0;height:44px}}';
   var LANGS = [['uk','Українська'],['en','English'],['es','Español'],['pl','Polski'],['hu','Magyar'],['de','Deutsch']];
-  var opts = LANGS.map(function (l) { return '<option value="' + (l[0] === 'uk' ? '' : 'https://www.aita.world/' + l[0] + '/') + '" lang="' + l[0] + '"' + (l[0] === 'uk' ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('');
+  var opts = LANGS.map(function (l) { return '<option value="" lang="' + l[0] + '"' + (l[0] === 'uk' ? ' selected' : ' disabled') + '>' + l[1] + (l[0] === 'uk' ? '' : ' — soon') + '</option>'; }).join('');
   var HTML = '<footer class="af"><div class="af-w"><b>Aita</b>'
   + off('Our solutions') + '<a href="' + L('modules') + '">Modules</a><a href="' + L('pricing') + '">Pricing</a>'
   + off('Partnership') + '<a href="' + L('blog') + '">Blog</a><a href="' + L('about') + '">About us</a>'
