@@ -494,6 +494,22 @@ html{scroll-behavior:smooth}
 #work .nb-two .nb-card img.shot{top:0!important;height:100%!important}
 
 
+
+/* FAQ: questions from client calls (Bohdan), answers approved by Marina 20.11.2026 — heading left, list right, hairlines, native details */
+.faq .w{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
+.faq h2{margin:0}
+.faq-l{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:20px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";flex:none;width:12px;height:12px;margin-top:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary:after{transform:translateY(5px) rotate(-135deg)}
+.faq summary:hover:after{border-color:var(--ink)}
+.faq summary:focus-visible{outline:2px solid #0060ff;outline-offset:2px}
+.faq details p{margin:0;padding:0 48px 24px 0;max-width:720px;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--mute)}
+@media (max-width:1024px){.faq .w{grid-template-columns:1fr;gap:var(--sp-head,32px)}}
+@media (max-width:760px){.faq summary{padding:16px 0}.faq details p{padding-right:0;padding-bottom:20px}}
+
 /* closing band */
 .close{padding:160px 0 128px;text-align:center}
 .close h2{margin:0;font-size:var(--fs-h2);line-height:var(--lh-h2);font-weight:500;letter-spacing:-.02em}
@@ -782,6 +798,13 @@ footer .row + .row{margin-top:24px;padding-top:24px}
         <div class="c c3"><b>from €50</b><p>Per month for the whole company, not per person</p></div>
       </div>
       <a class="lk" href="uk/pricing.html">View pricing →</a>
+    </div>
+  </section>
+
+  <section class="sec faq" id="faq">
+    <div class="w">
+      <h2>Questions and answers</h2>
+      <div class="faq-l"><details><summary>Why do we need another system?</summary><p>To run clients, projects and documents in one system built for energy. We are building a community where you will be able to find clients, partners, equipment and services.</p></details><details><summary>Is it only for energy?</summary><p>No. If you provide, or want to provide, services to energy companies, the platform works for you too.</p></details><details><summary>Which of our tools will it replace?</summary><p>Aita replaces your CRM, task and document tools, and the software for plant design, single-line diagrams and equipment selection. If you need something that isn’t here, we can build it for you as a separate module or connect the software you already use.</p></details><details><summary>Will it connect to what we already use?</summary><p>Yes. You can connect email, calendar, telephony and DXF drawings, and move your data over from another CRM. If the software you need isn’t on the list, we can connect it.</p></details><details><summary>Who on our team will see what?</summary><p>You set each person’s rights yourself: view only, edit or manage. Access to each project is opened separately. People outside the company can be given one folder or file by link.</p></details><details><summary>Who can see our data?</summary><p>Only the people you give access to. You can forbid the AI from remembering your documents.</p></details><details><summary>What does the AI do on its own, and what should we check?</summary><p>The AI sorts documents into folders and fills in project data on its own, and next to each value shows which document it came from. It also designs the plant and selects equipment, and a second agent checks that work. The final decision is yours.</p></details><details><summary>How is it better than specialised energy software?</summary><p>Specialised software does one thing, for example only calculates the plant. In Aita everything is connected: the client, the project, the calculation and the documents, so nothing has to be moved from one program to another.</p></details><details><summary>Where do we start?</summary><p>With what you need most. Most teams start with clients and projects and add the rest later.</p></details><details><summary>Do we have to do everything by hand?</summary><p>No. You can write to the AI or tell it by voice what needs doing, and it will do it.</p></details><details><summary>Can we try it for free?</summary><p>Yes. For the first 7 days you get €10 of AI use for free. After that you keep access to the platform, but to work with the AI you need to buy a plan.</p></details></div>
     </div>
   </section>
 

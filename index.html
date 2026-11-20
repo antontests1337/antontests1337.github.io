@@ -494,6 +494,22 @@ html{scroll-behavior:smooth}
 #work .nb-two .nb-card img.shot{top:0!important;height:100%!important}
 
 
+
+/* FAQ: questions from client calls (Bohdan), answers approved by Marina 20.11.2026 — heading left, list right, hairlines, native details */
+.faq .w{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
+.faq h2{margin:0}
+.faq-l{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:20px 0;font-size:var(--fs-lead);line-height:var(--lh-lead);font-weight:500;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";flex:none;width:12px;height:12px;margin-top:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary:after{transform:translateY(5px) rotate(-135deg)}
+.faq summary:hover:after{border-color:var(--ink)}
+.faq summary:focus-visible{outline:2px solid #0060ff;outline-offset:2px}
+.faq details p{margin:0;padding:0 48px 24px 0;max-width:720px;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--mute)}
+@media (max-width:1024px){.faq .w{grid-template-columns:1fr;gap:var(--sp-head,32px)}}
+@media (max-width:760px){.faq summary{padding:16px 0}.faq details p{padding-right:0;padding-bottom:20px}}
+
 /* closing band */
 .close{padding:160px 0 128px;text-align:center}
 .close h2{margin:0;font-size:var(--fs-h2);line-height:var(--lh-h2);font-weight:500;letter-spacing:-.02em}
@@ -782,6 +798,13 @@ footer .row + .row{margin-top:24px;padding-top:24px}
         <div class="c c3"><b>від €50</b><p>На місяць за всю компанію, а не за кожну людину</p></div>
       </div>
       <a class="lk" href="uk/pricing.html">Дивитися ціни →</a>
+    </div>
+  </section>
+
+  <section class="sec faq" id="faq">
+    <div class="w">
+      <h2>Питання й відповіді</h2>
+      <div class="faq-l"><details><summary>Навіщо нам ще одна система?</summary><p>Щоб вести клієнтів, проєкти й документи в одній системі, зробленій під енергетику. Ми будуємо спільноту, де ви зможете шукати клієнтів, партнерів, обладнання й послуги.</p></details><details><summary>Це тільки для енергетики?</summary><p>Ні. Якщо ви надаєте або хочете надавати послуги енергетичним компаніям, платформа підходить і вам.</p></details><details><summary>Що з наших інструментів це замінить?</summary><p>Aita замінює CRM, програми для задач і документів, а також програми для проєктування станцій, креслення однолінійних схем і підбору обладнання. Якщо вам потрібне те, чого тут немає, ми можемо зробити це для вас окремим модулем або підключенням до програми, якою ви вже користуєтесь.</p></details><details><summary>Чи підключиться до того, чим ми вже користуємось?</summary><p>Так. Можна підключити пошту, календар, телефонію й креслення у форматі DXF, а також перенести дані з іншої CRM. Якщо потрібної вам програми немає в списку, ми можемо її підключити.</p></details><details><summary>Хто з наших людей що побачить?</summary><p>Права кожному ви даєте самі: тільки переглядати, редагувати або керувати. До кожного проєкту доступ відкривається окремо. Людям ззовні можна відкрити одну папку чи файл за посиланням.</p></details><details><summary>Хто бачить наші дані?</summary><p>Тільки ті, кому ви дали доступ. Можна заборонити ШІ запам'ятовувати ваші документи.</p></details><details><summary>Що ШІ робить сам, а що треба перевіряти?</summary><p>ШІ сам розкладає документи по папках і заповнює дані проєкту, а біля кожного значення показує, з якого документа його взяв. Ще він проєктує станцію й добирає обладнання, а другий агент перевіряє цю роботу. Остаточне рішення за вами.</p></details><details><summary>Чим це краще за спеціалізовані програми для енергетики?</summary><p>Спеціалізована програма робить щось одне, наприклад тільки рахує станцію. В Aita все пов'язане між собою: клієнт, проєкт, розрахунок і документи, тож нічого не треба переносити з однієї програми в іншу.</p></details><details><summary>З чого почати?</summary><p>З того, що вам потрібно найбільше. Зазвичай починають із клієнтів і проєктів, а решту додають пізніше.</p></details><details><summary>Чи треба все робити вручну?</summary><p>Ні. Можна написати ШІ або сказати голосом, що треба зробити, і він це зробить.</p></details><details><summary>Чи можна спробувати безкоштовно?</summary><p>Так. Перші 7 днів ви користуєтеся ШІ на 10 євро безкоштовно. Після цього доступ до платформи залишається, але щоб працювати з ШІ, потрібно купити пакет.</p></details></div>
     </div>
   </section>
 
